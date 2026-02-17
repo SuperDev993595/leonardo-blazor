@@ -1,0 +1,50 @@
+@* Reusable auth form field with optional left icon and password visibility toggle *@
+<div class="form-group">
+    <label for="@Id">@Label</label>
+    <div class="input-wrapper">
+        @if (!string.IsNullOrEmpty(LeftIconClass))
+        {
+            <i class="@LeftIconClass left" aria-hidden="true"></i>
+        }
+        <InputText id="@Id"
+                  @bind-Value="CurrentValue"
+                  class="auth-input"
+                  type="@ActualInputType"
+                  placeholder="@Placeholder" />
+        @if (ShowPasswordToggle)
+        {
+            <i class="fa-regular @(showPassword ? "fa-eye-slash" : "fa-eye") right"
+               @onclick="TogglePasswordVisibility"
+               role="button"
+               aria-label="Toggle password visibility"></i>
+        }
+    </div>
+    @if (BottomContent is not null)
+    {
+        @BottomContent
+    }
+</div>
+
+@code {
+    [Parameter] public string Id { get; set; } = "";
+    [Parameter] public string Label { get; set; } = "";
+    [Parameter] public string Placeholder { get; set; } = "";
+    [Parameter] public string InputType { get; set; } = "text";
+    [Parameter] public string? LeftIconClass { get; set; }
+    [Parameter] public bool ShowPasswordToggle { get; set; }
+    [Parameter] public RenderFragment? BottomContent { get; set; }
+
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public EventCallback<string?> ValueChanged { get; set; }
+
+    private bool showPassword;
+    private string ActualInputType => ShowPasswordToggle ? (showPassword ? "text" : "password") : InputType;
+
+    private string? CurrentValue
+    {
+        get => Value;
+        set => ValueChanged.InvokeAsync(value);
+    }
+
+    private void TogglePasswordVisibility() => showPassword = !showPassword;
+}

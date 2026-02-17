@@ -10,36 +10,26 @@
             <p class="auth-subtitle">Inicia sesión para acceder a tus datos</p>
 
             <EditForm Model="@model" OnValidSubmit="HandleLogin" class="auth-form">
-                <div class="form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <div class="input-wrapper">
-                        <i class="fa-regular fa-envelope left"></i>
-                        <InputText id="email"
-                                   @bind-Value="model.Email"
-                                   class="auth-input"
-                                   type="email"
-                                   placeholder="Escribe tu correo" />
-                    </div>
-                </div>
+                <AuthInput Id="email"
+                           Label="Correo Electrónico"
+                           Placeholder="Escribe tu correo"
+                           InputType="email"
+                           LeftIconClass="fa-regular fa-envelope"
+                           @bind-Value="model.Email" />
 
-                <div class="form-group">
-                    <label for="password">Contraseña</label>
-                    <div class="input-wrapper">
-                        <i class="fa-solid fa-lock left"></i>
-                        <InputText id="password"
-                                   @bind-Value="model.Password"
-                                   class="auth-input"
-                                   type="@(showPassword ? "text" : "password")"
-                                   placeholder="Escribe tu contraseña" />
-                        <i class="fa-regular @(showPassword ? "fa-eye-slash" : "fa-eye") right"
-                           @onclick="TogglePassword"
-                           role="button"
-                           aria-label="Toggle password visibility"></i>
-                    </div>
-                    <div class="auth-forgot">
-                        <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
-                    </div>
-                </div>
+                <AuthInput Id="password"
+                           Label="Contraseña"
+                           Placeholder="Escribe tu contraseña"
+                           InputType="password"
+                           LeftIconClass="fa-solid fa-lock"
+                           ShowPasswordToggle="true"
+                           @bind-Value="model.Password">
+                    <BottomContent>
+                        <div class="auth-forgot">
+                            <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
+                        </div>
+                    </BottomContent>
+                </AuthInput>
 
                 <button type="submit" class="auth-submit-btn">Iniciar Sesión</button>
             </EditForm>
@@ -63,9 +53,6 @@
 
 @code {
     private LoginModel model = new();
-    private bool showPassword;
-
-    private void TogglePassword() => showPassword = !showPassword;
 
     private void HandleLogin()
     {
