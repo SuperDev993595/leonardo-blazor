@@ -4,6 +4,10 @@ using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+#if DEBUG
+builder.WebHost.UseStaticWebAssets();
+#endif
+
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

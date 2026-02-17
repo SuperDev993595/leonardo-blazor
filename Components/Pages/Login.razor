@@ -1,7 +1,6 @@
 @page "/"
 @layout AuthLayout
 @rendermode InteractiveServer
-@using MudBlazor
 <PageTitle>Iniciar sesión</PageTitle>
 
 <div class="auth-screen">
@@ -12,40 +11,37 @@
 
             <EditForm Model="@model" OnValidSubmit="HandleLogin" class="auth-form">
                 <div class="form-group">
-                    <MudTextField @bind-Value="model.Email"
-                                  Label="Correo Electrónico"
-                                  Placeholder="Escribe tu correo"
-                                  Variant="Variant.Text"
-                                  Class="auth-field"
-                                  Margin="Margin.None" />
+                    <label for="email">Correo Electrónico</label>
+                    <div class="input-wrapper">
+                        <i class="fa-regular fa-envelope left"></i>
+                        <InputText id="email"
+                                   @bind-Value="model.Email"
+                                   class="auth-input"
+                                   type="email"
+                                   placeholder="Escribe tu correo" />
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <MudTextField @bind-Value="model.Password"
-                                  Label="Contraseña"
-                                  Placeholder="Escribe tu contraseña"
-                                  InputType="@(showPassword ? InputType.Text : InputType.Password)"
-                                  Variant="Variant.Text"
-                                  Class="auth-field"
-                                  Margin="Margin.None">
-                        <AdornmentEnd>
-                            <MudIconButton Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
-                                           OnClick="@(() => { showPassword = !showPassword; })"
-                                           Color="Color.Default"
-                                           Size="Size.Small" />
-                        </AdornmentEnd>
-                    </MudTextField>
+                    <label for="password">Contraseña</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock left"></i>
+                        <InputText id="password"
+                                   @bind-Value="model.Password"
+                                   class="auth-input"
+                                   type="@(showPassword ? "text" : "password")"
+                                   placeholder="Escribe tu contraseña" />
+                        <i class="fa-regular @(showPassword ? "fa-eye-slash" : "fa-eye") right"
+                           @onclick="TogglePassword"
+                           role="button"
+                           aria-label="Toggle password visibility"></i>
+                    </div>
                     <div class="auth-forgot">
                         <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
                     </div>
                 </div>
 
-                <MudButton Variant="Variant.Filled"
-                           FullWidth="true"
-                           Class="auth-submit-btn"
-                           ButtonType="ButtonType.Submit">
-                    Iniciar Sesión
-                </MudButton>
+                <button type="submit" class="auth-submit-btn">Iniciar Sesión</button>
             </EditForm>
 
             <div class="auth-divider">También puedes</div>
@@ -68,6 +64,8 @@
 @code {
     private LoginModel model = new();
     private bool showPassword;
+
+    private void TogglePassword() => showPassword = !showPassword;
 
     private void HandleLogin()
     {

@@ -1,4 +1,4 @@
-/* Auth screens - adapted from HTML reference */
+/* Auth screens - matching HTML reference */
 .auth-screen {
     margin: 0;
     padding: 0;
@@ -14,8 +14,8 @@
 }
 
 .auth-container {
-    width: 90%;
-    max-width: 1200px;
+    width: 95%;
+    max-width: 1300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -26,7 +26,7 @@
     width: 600px;
     padding: 70px;
     background: #f4f4f4;
-    border-radius: 20px;
+    border-radius: 30px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
 }
 
@@ -41,46 +41,62 @@
 .auth-form-card p,
 .auth-subtitle {
     font-size: 14px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
     color: #444;
 }
 
 .auth-form .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
-.auth-form .form-group label,
-.auth-form .form-group .mud-input-label {
+.auth-form .form-group label {
     font-size: 14px;
     font-weight: 500;
     display: block;
-    margin-bottom: 8px;
 }
 
-.auth-form .form-group .mud-input-label-shrink {
-    transform: none !important;
-}
-
-.auth-form .input-wrapper,
-.auth-form .form-group .mud-input-control {
-    margin-top: 0;
+/* INPUT WITH ICON - same structure as HTML reference */
+.auth-form .input-wrapper {
     position: relative;
+    margin-top: 8px;
 }
 
-.auth-form .input-wrapper input,
-.auth-form .mud-input-outlined .mud-input-slot {
+.auth-form .input-wrapper .auth-input,
+.auth-form .input-wrapper input {
     width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
+    padding: 14px 45px 14px 45px;
+    border-radius: 16px;
     border: 2px solid #074344;
     outline: none;
     font-size: 14px;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+}
+
+.auth-form .input-wrapper i.left {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #ffc334;
+    pointer-events: none;
+}
+
+.auth-form .input-wrapper i.right {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #999;
+    cursor: pointer;
 }
 
 .auth-forgot {
     text-align: right;
     font-size: 12px;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
 .auth-link {
@@ -93,40 +109,37 @@
     text-decoration: underline;
 }
 
-.auth-submit-btn,
-.auth-form .btn {
+.auth-submit-btn {
     width: 100%;
-    padding: 14px;
+    padding: 15px;
     border: none;
-    border-radius: 14px;
+    border-radius: 16px;
     background: #ffc334;
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 25px;
     transition: 0.3s ease;
+    font-family: "Poppins", sans-serif;
 }
 
-.auth-submit-btn:hover,
-.auth-form .btn:hover {
+.auth-submit-btn:hover {
     background: #e6b12f;
 }
 
 .auth-divider {
-    margin: 30px 0;
+    margin: 35px 0;
     text-align: center;
     font-size: 13px;
     color: #555;
 }
 
-.auth-signup-text,
-.auth-form .register {
+.auth-signup-text {
     text-align: center;
     font-size: 14px;
 }
 
-.auth-link-register,
-.auth-form .register span {
+.auth-link-register {
     color: #074344;
     font-weight: 600;
     cursor: pointer;
@@ -139,7 +152,7 @@
 
 /* RIGHT SIDE */
 .auth-marketing-panel {
-    width: 450px;
+    width: 500px;
     color: white;
     position: relative;
     min-height: 600px;
@@ -153,7 +166,7 @@
 
 .auth-marketing-panel h2,
 .marketing-title {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 700;
     margin-bottom: 20px;
 }
@@ -168,61 +181,25 @@
 
 .marketing-logo {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 140px;
-    height: 45px;
+    width: 200px;
+    height: 65px;
     background: white;
     display: flex;
     justify-content: center;
     align-items: center;
     color: #333;
-    font-size: small;
-    border-radius: 0;
+    font-weight: 600;
+    border-radius: 10px;
 }
 
-/* MudBlazor Text variant - label above input, custom bordered style */
-.auth-form .mud-input-text .mud-input-slot {
-    padding: 14px 16px !important;
-    border-radius: 12px !important;
-    border: 2px solid #074344 !important;
-    font-size: 14px !important;
-    background: white !important;
-}
-
-.auth-form .mud-input-text .mud-input-slot:hover,
-.auth-form .mud-input-text .mud-input-slot:focus-within {
-    border-color: #074344 !important;
-    box-shadow: none !important;
-}
-
-.auth-form .mud-input-text .mud-input-underline::before,
-.auth-form .mud-input-text .mud-input-underline::after {
-    display: none !important;
-}
-
-.auth-form .mud-input .mud-input-label {
-    color: #333 !important;
-    margin-bottom: 8px !important;
-    position: static !important;
-}
-
-.auth-form .form-group .mud-input-root {
-    flex-direction: column !important;
-    align-items: stretch !important;
-    gap: 0 !important;
-}
-
-.auth-form .mud-button-root {
-    text-transform: none;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
+/* Responsive - matching reference */
+@media (max-width: 1000px) {
     .auth-container {
         flex-direction: column;
-        gap: 40px;
+        gap: 50px;
     }
 
     .auth-form-card {
