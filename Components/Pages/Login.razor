@@ -1,0 +1,81 @@
+@page "/"
+@layout AuthLayout
+@rendermode InteractiveServer
+<PageTitle>Iniciar sesión</PageTitle>
+
+<div class="auth-screen">
+    <div class="auth-container">
+        <div class="auth-form-card">
+            <h1 class="auth-title">¡Bienvenido de nuevo!</h1>
+            <p class="auth-subtitle">Inicia sesión para acceder a tus datos</p>
+
+            <EditForm Model="@model" OnValidSubmit="HandleLogin" class="auth-form">
+                <div class="form-group">
+                    <MudTextField @bind-Value="model.Email"
+                                  Label="Correo Electrónico"
+                                  Placeholder="Escribe tu correo"
+                                  Variant="Variant.Text"
+                                  Class="auth-field"
+                                  Margin="Margin.None" />
+                </div>
+
+                <div class="form-group">
+                    <MudTextField @bind-Value="model.Password"
+                                  Label="Contraseña"
+                                  Placeholder="Escribe tu contraseña"
+                                  InputType="@(showPassword ? InputType.Text : InputType.Password)"
+                                  Variant="Variant.Text"
+                                  Class="auth-field"
+                                  Margin="Margin.None">
+                        <AdornmentEnd>
+                            <MudIconButton Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                                           OnClick="@(() => { showPassword = !showPassword; })"
+                                           Color="Color.Default"
+                                           Size="Size.Small" />
+                        </AdornmentEnd>
+                    </MudTextField>
+                    <div class="auth-forgot">
+                        <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
+                    </div>
+                </div>
+
+                <MudButton Variant="Variant.Filled"
+                           FullWidth="true"
+                           Class="auth-submit-btn"
+                           ButtonType="ButtonType.Submit">
+                    Iniciar Sesión
+                </MudButton>
+            </EditForm>
+
+            <div class="auth-divider">También puedes</div>
+
+            <div class="auth-signup-text">
+                ¿No tienes una cuenta? <NavLink href="/register" class="auth-link-register">Regístrate</NavLink>
+            </div>
+        </div>
+
+        <div class="auth-marketing-panel">
+            <div class="right-content">
+                <h2 class="marketing-title">Tu plataforma de seguros de confianza</h2>
+                <p class="marketing-quote">"Un seguro es algo que esperas no necesitar nunca, pero que agradeces tener en el momento justo"</p>
+            </div>
+            <div class="marketing-logo">LOGO</div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private LoginModel model = new();
+    private bool showPassword;
+
+    private void HandleLogin()
+    {
+        // TODO: Implement login logic
+    }
+
+    private class LoginModel
+    {
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+    }
+}

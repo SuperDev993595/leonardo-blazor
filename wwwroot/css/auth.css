@@ -1,0 +1,250 @@
+/* Auth screens - adapted from HTML reference */
+.auth-screen {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+      radial-gradient(circle at 0% 0%, #ffc334 0%, transparent 40%),
+      radial-gradient(circle at 100% 100%, #ffc334 0%, transparent 40%),
+      linear-gradient(135deg, #0a3f40 0%, #074344 50%, #062f30 100%);
+}
+
+.auth-container {
+    width: 90%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* LEFT CARD */
+.auth-form-card {
+    width: 600px;
+    padding: 70px;
+    background: #f4f4f4;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.auth-form-card h1,
+.auth-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.auth-form-card p,
+.auth-subtitle {
+    font-size: 14px;
+    margin-bottom: 30px;
+    color: #444;
+}
+
+.auth-form .form-group {
+    margin-bottom: 20px;
+}
+
+.auth-form .form-group label,
+.auth-form .form-group .mud-input-label {
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.auth-form .form-group .mud-input-label-shrink {
+    transform: none !important;
+}
+
+.auth-form .input-wrapper,
+.auth-form .form-group .mud-input-control {
+    margin-top: 0;
+    position: relative;
+}
+
+.auth-form .input-wrapper input,
+.auth-form .mud-input-outlined .mud-input-slot {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid #074344;
+    outline: none;
+    font-size: 14px;
+}
+
+.auth-forgot {
+    text-align: right;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.auth-link {
+    color: #074344;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.auth-link:hover {
+    text-decoration: underline;
+}
+
+.auth-submit-btn,
+.auth-form .btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    background: #ffc334;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s ease;
+}
+
+.auth-submit-btn:hover,
+.auth-form .btn:hover {
+    background: #e6b12f;
+}
+
+.auth-divider {
+    margin: 30px 0;
+    text-align: center;
+    font-size: 13px;
+    color: #555;
+}
+
+.auth-signup-text,
+.auth-form .register {
+    text-align: center;
+    font-size: 14px;
+}
+
+.auth-link-register,
+.auth-form .register span {
+    color: #074344;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.auth-link-register:hover {
+    text-decoration: underline;
+}
+
+/* RIGHT SIDE */
+.auth-marketing-panel {
+    width: 450px;
+    color: white;
+    position: relative;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-marketing-panel .right-content {
+    margin: auto 0;
+}
+
+.auth-marketing-panel h2,
+.marketing-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.auth-marketing-panel p,
+.marketing-quote {
+    font-size: 15px;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin: 0;
+}
+
+.marketing-logo {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 45px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #333;
+    font-size: small;
+    border-radius: 0;
+}
+
+/* MudBlazor Text variant - label above input, custom bordered style */
+.auth-form .mud-input-text .mud-input-slot {
+    padding: 14px 16px !important;
+    border-radius: 12px !important;
+    border: 2px solid #074344 !important;
+    font-size: 14px !important;
+    background: white !important;
+}
+
+.auth-form .mud-input-text .mud-input-slot:hover,
+.auth-form .mud-input-text .mud-input-slot:focus-within {
+    border-color: #074344 !important;
+    box-shadow: none !important;
+}
+
+.auth-form .mud-input-text .mud-input-underline::before,
+.auth-form .mud-input-text .mud-input-underline::after {
+    display: none !important;
+}
+
+.auth-form .mud-input .mud-input-label {
+    color: #333 !important;
+    margin-bottom: 8px !important;
+    position: static !important;
+}
+
+.auth-form .form-group .mud-input-root {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 0 !important;
+}
+
+.auth-form .mud-button-root {
+    text-transform: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .auth-container {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .auth-form-card {
+        width: 100%;
+        max-width: 600px;
+        padding: 50px 40px;
+    }
+
+    .auth-marketing-panel {
+        width: 100%;
+        text-align: center;
+        min-height: 400px;
+    }
+
+    .auth-marketing-panel .right-content {
+        margin: 0 auto;
+    }
+
+    .marketing-logo {
+        position: relative;
+        left: auto;
+        transform: none;
+        margin: 2rem auto 0;
+    }
+}

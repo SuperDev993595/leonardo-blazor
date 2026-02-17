@@ -1,0 +1,107 @@
+@page "/register"
+@layout AuthLayout
+@rendermode InteractiveServer
+<PageTitle>Registro</PageTitle>
+
+<div class="auth-screen">
+    <div class="auth-container">
+        <div class="auth-form-card">
+            <h1 class="auth-title">Crear cuenta</h1>
+            <p class="auth-subtitle">Regístrate para acceder a la plataforma</p>
+
+            <EditForm Model="@model" OnValidSubmit="HandleRegister" class="auth-form">
+                <div class="form-group">
+                <MudTextField @bind-Value="model.FullName"
+                              Label="Nombre completo"
+                              Placeholder="Escribe tu nombre"
+                              Variant="Variant.Text"
+                              Class="auth-field"
+                              Margin="Margin.None" />
+                </div>
+
+                <div class="form-group">
+                <MudTextField @bind-Value="model.Email"
+                              Label="Correo Electrónico"
+                              Placeholder="Escribe tu correo"
+                              Variant="Variant.Text"
+                              Class="auth-field"
+                              Margin="Margin.None" />
+                </div>
+
+                <div class="form-group">
+                <MudTextField @bind-Value="model.Password"
+                              Label="Contraseña"
+                              Placeholder="Escribe tu contraseña"
+                              InputType="@(showPassword ? InputType.Text : InputType.Password)"
+                              Variant="Variant.Text"
+                              Class="auth-field"
+                              Margin="Margin.None">
+                    <AdornmentEnd>
+                        <MudIconButton Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                                       OnClick="@(() => { showPassword = !showPassword; })"
+                                       Color="Color.Default" />
+                    </AdornmentEnd>
+                </MudTextField>
+                </div>
+
+                <div class="form-group">
+                <MudTextField @bind-Value="model.ConfirmPassword"
+                              Label="Confirmar contraseña"
+                              Placeholder="Repite tu contraseña"
+                              InputType="@(showConfirmPassword ? InputType.Text : InputType.Password)"
+                              Variant="Variant.Text"
+                              Class="auth-field"
+                              Margin="Margin.None">
+                    <AdornmentEnd>
+                        <MudIconButton Icon="@(showConfirmPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                                       OnClick="@(() => { showConfirmPassword = !showConfirmPassword; })"
+                                       Color="Color.Default" />
+                    </AdornmentEnd>
+                </MudTextField>
+                </div>
+
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Warning"
+                           FullWidth="true"
+                           Size="Size.Large"
+                           Class="auth-submit-btn"
+                           ButtonType="ButtonType.Submit">
+                    Registrarse
+                </MudButton>
+            </EditForm>
+
+            <div class="auth-divider">También puedes</div>
+
+            <p class="auth-signup-text">
+                ¿Ya tienes una cuenta? <NavLink href="/" class="auth-link-register">Iniciar sesión</NavLink>
+            </p>
+        </div>
+
+        <div class="auth-marketing-panel">
+            <div class="right-content">
+                <h2 class="marketing-title">Tu plataforma de seguros de confianza</h2>
+                <p class="marketing-quote">"Un seguro es algo que esperas no necesitar nunca, pero que agradeces tener en el momento justo"</p>
+            </div>
+            <div class="marketing-logo">LOGO</div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private RegisterModel model = new();
+    private bool showPassword;
+    private bool showConfirmPassword;
+
+    private void HandleRegister()
+    {
+        // TODO: Implement registration logic
+    }
+
+    private class RegisterModel
+    {
+        public string FullName { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string Password { get; set; } = "";
+        public string ConfirmPassword { get; set; } = "";
+    }
+}

@@ -1,0 +1,68 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Visual Studio cache/options
+.vs/
+.vscode/
+
+# Visual Studio Code
+*.code-workspace
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+*.sln.iml
+
+# Local environment
+.env
+.env.local
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# npm
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+publish/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test runner
+.coverage
+coverage/
+TestResults/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Project-specific
+launchSettings.json
