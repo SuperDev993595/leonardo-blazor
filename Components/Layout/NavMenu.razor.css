@@ -44,6 +44,11 @@
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Larger menu item icons */
+.sidebar-nav ::deep .mud-nav-link .mud-icon-root {
+    font-size: 1.375rem;
+}
+
 /* Smooth hover */
 .sidebar-nav ::deep .mud-nav-link:hover {
     background-color: var(--mud-palette-action-default-hover, #f3f4f6);
@@ -56,6 +61,19 @@
     background-color: var(--mud-palette-primary, #115e59);
     color: var(--mud-palette-primary-contrast, white);
     border-radius: 0.475rem;
+}
+
+/* Active menu item icon color */
+.sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon-root,
+.sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon,
+.sidebar-nav ::deep .mud-nav-link.active .mud-icon-root,
+.sidebar-nav ::deep .mud-nav-link.mud-nav-link-active .mud-icon-root {
+    color: #acc295 !important;
+}
+.sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon-root svg,
+.sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon svg {
+    fill: #acc295 !important;
+    color: #acc295 !important;
 }
 
 .nav-section-label {

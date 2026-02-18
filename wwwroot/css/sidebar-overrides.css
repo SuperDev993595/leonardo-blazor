@@ -7,6 +7,11 @@
     font-size: 0.875rem !important;
 }
 
+/* Larger menu item icons (do not shrink with generic rule above) */
+#layout-sidebar .mud-nav-link .mud-icon-root {
+    font-size: 1.375rem !important;
+}
+
 /* Active menu item - theme-consistent, rounded background */
 #layout-sidebar .sidebar-nav-active,
 #layout-sidebar .sidebar-nav-active.mud-nav-link,
@@ -17,8 +22,23 @@
 }
 #layout-sidebar .sidebar-nav-active .mud-nav-link-text,
 #layout-sidebar .sidebar-nav-active .mud-typography,
-#layout-sidebar .sidebar-nav-active span,
-#layout-sidebar .sidebar-nav-active *,
-#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link * {
+#layout-sidebar .sidebar-nav-active span:not(.mud-icon-root):not(.mud-icon),
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-nav-link-text,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-typography {
     color: var(--mud-palette-primary-contrast, white) !important;
+}
+
+/* Active menu item icon color - icon root, inner icon class, and SVG fill */
+#layout-sidebar .sidebar-nav-active .mud-icon-root,
+#layout-sidebar .sidebar-nav-active .mud-icon,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon-root,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon {
+    color: #b6bb73 !important;
+}
+#layout-sidebar .sidebar-nav-active .mud-icon-root svg,
+#layout-sidebar .sidebar-nav-active .mud-icon svg,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon-root svg,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon svg {
+    fill: #b6bb73 !important;
+    color: #b6bb73 !important;
 }
