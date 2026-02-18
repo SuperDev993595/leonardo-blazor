@@ -1,60 +1,97 @@
-@using MudBlazor
-@* Reusable auth form field using MudBlazor while preserving the project's visual style *@
-<div class="form-group">
-    <label for="@Id">@Label</label>
-    <div class="input-wrapper">
-        @if (!string.IsNullOrEmpty(LeftIconClass))
+@* Reusable outlined input with optional left icon and customizable styling *@
+<div class="auth-input-root">
+    @if (!string.IsNullOrEmpty(Label))
+    {
+        <label for="@Id" class="auth-input-label">@Label</label>
+    }
+    <div class="auth-input-wrapper @(_focused ? "focused" : "")" style="@WrapperStyle">
+        @if (LeftIcon != null || !string.IsNullOrEmpty(LeftIconClass))
         {
-            <i class="@LeftIconClass left" aria-hidden="true"></i>
+            <div class="auth-input-icon @(string.IsNullOrEmpty(LeftIconColor) ? "" : "auth-input-icon-colored")" style="@IconStyle">
+                @if (LeftIcon != null)
+                {
+                    @LeftIcon
+                }
+                else
+                {
+                    <i class="@LeftIconClass" aria-hidden="true"></i>
+                }
+            </div>
         }
-
+        <input id="@Id"
+               type="@ActualInputType"
+               class="auth-input-field"
+               placeholder="@Placeholder"
+               value="@Value"
+               @oninput="OnInput"
+               @onfocus="OnFocus"
+               @onfocusout="OnFocusOut" />
         @if (ShowPasswordToggle)
         {
-            <MudTextField T="string"
-                          Id="@Id"
-                          @bind-Value="CurrentValue"
-                          Placeholder="@Placeholder"
-                          Variant="Variant.Text"
-                          InputClass="auth-input"
-                          InputType="@ActualInputType"
-                          Adornment="Adornment.End"
-                          AdornmentIcon="@(showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye")"
-                          OnAdornmentClick="TogglePasswordVisibility" />
+            <button type="button"
+                    class="auth-input-toggle"
+                    aria-label="@(showPassword ? "Ocultar contraseña" : "Mostrar contraseña")"
+                    @onclick="TogglePasswordVisibility">
+                <MudIcon Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)" Size="Size.Small" />
+            </button>
         }
-        else
-        {
-            <MudTextField T="string"
-                          Id="@Id"
-                          @bind-Value="CurrentValue"
-                          Placeholder="@Placeholder"
-                          Variant="Variant.Text"
-                          InputClass="auth-input"
-                          InputType="@ActualInputType" />
-        }
-
     </div>
+    @if (BottomContent != null)
+    {
+        @BottomContent
+    }
 </div>
 
 @code {
     [Parameter] public string Id { get; set; } = "";
     [Parameter] public string Label { get; set; } = "";
     [Parameter] public string Placeholder { get; set; } = "";
-    [Parameter] public InputType InputType { get; set; } = InputType.Text;
+    [Parameter] public string Type { get; set; } = "text";
+    [Parameter] public InputType? InputType { get; set; }
+    [Parameter] public RenderFragment? LeftIcon { get; set; }
     [Parameter] public string? LeftIconClass { get; set; }
+    [Parameter] public string? LeftIconColor { get; set; }
+    [Parameter] public string BackgroundColor { get; set; } = "#ffffff";
+    [Parameter] public string OutlineColor { get; set; } = "#cec497";
+    [Parameter] public string BorderWidth { get; set; } = "1px";
+    [Parameter] public string BorderRadius { get; set; } = "0.375rem";
+    [Parameter] public string Height { get; set; } = "2.5rem";
     [Parameter] public bool ShowPasswordToggle { get; set; }
     [Parameter] public RenderFragment? BottomContent { get; set; }
 
     [Parameter] public string? Value { get; set; }
     [Parameter] public EventCallback<string?> ValueChanged { get; set; }
 
+    private bool _focused;
     private bool showPassword;
-    private InputType ActualInputType => ShowPasswordToggle ? (showPassword ? InputType.Text : InputType.Password) : InputType;
 
-    private string? CurrentValue
+    private string ActualInputType
     {
-        get => Value;
-        set => ValueChanged.InvokeAsync(value);
+        get
+        {
+            if (ShowPasswordToggle && showPassword) return "text";
+            if (InputType.HasValue)
+            {
+                return InputType.Value switch
+                {
+                    MudBlazor.InputType.Email => "email",
+                    MudBlazor.InputType.Password => "password",
+                    _ => "text"
+                };
+            }
+            return Type?.ToLowerInvariant() ?? "text";
+        }
     }
 
+    private string WrapperStyle => $"background-color: {BackgroundColor}; border: {BorderWidth} solid {OutlineColor}; border-radius: {BorderRadius}; height: {Height};";
+    private string IconStyle => !string.IsNullOrEmpty(LeftIconColor) ? $"color: {LeftIconColor};" : "";
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        await ValueChanged.InvokeAsync(e.Value?.ToString());
+    }
+
+    private void OnFocus(FocusEventArgs _) => _focused = true;
+    private void OnFocusOut(FocusEventArgs _) => _focused = false;
     private void TogglePasswordVisibility() => showPassword = !showPassword;
 }

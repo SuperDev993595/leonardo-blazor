@@ -10,11 +10,16 @@
             <p class="auth-subtitle">Inicia sesión para acceder a tus datos</p>
 
             <EditForm Model="@model" OnValidSubmit="HandleLogin" class="auth-form">
+                <div class="auth-form-fields">
                 <AuthInput Id="email"
                            Label="Correo Electrónico"
                            Placeholder="Escribe tu correo"
                            InputType="InputType.Email"
                            LeftIconClass="fa-regular fa-envelope"
+                           LeftIconColor="#dcc17a"
+                           OutlineColor="#1e373c"
+                           BorderRadius="12px"
+                           BorderWidth="2px"
                            @bind-Value="model.Email" />
 
                 <AuthInput Id="password"
@@ -22,13 +27,19 @@
                            Placeholder="Escribe tu contraseña"
                            InputType="InputType.Password"
                            LeftIconClass="fa-solid fa-lock"
+                           LeftIconColor="#dcc17a"
+                           OutlineColor="#1e373c"
+                           BorderRadius="12px"
+                           BorderWidth="2px"
                            ShowPasswordToggle="true"
-                           @bind-Value="model.Password"/>
-                <BottomContent>
-                    <div class="auth-forgot">
-                        <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
-                    </div>
-                </BottomContent>
+                           @bind-Value="model.Password">
+                    <BottomContent>
+                        <div class="auth-forgot">
+                            <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
+                        </div>
+                    </BottomContent>
+                </AuthInput>
+                </div>
                 <button type="submit" class="auth-submit-btn">Iniciar Sesión</button>
             </EditForm>
 

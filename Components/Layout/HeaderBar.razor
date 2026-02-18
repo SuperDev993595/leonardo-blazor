@@ -3,14 +3,19 @@
 <div class="header-bar">
     <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="OnToggleClick" aria-label="Toggle sidebar" class="header-bar-menu" />
     <div class="header-bar-spacer"></div>
-    <MudTextField @bind-Value="_searchText"
-                  Placeholder="Buscar"
-                  Adornment="Adornment.Start"
-                  AdornmentIcon="@Icons.Material.Filled.Search"
-                  IconSize="Size.Small"
-                  Variant="Variant.Outlined"
-                  Class="header-bar-search"
-                  Immediate="true" />
+    <div class="header-bar-search">
+        <AuthInput @bind-Value="_searchText"
+                   Placeholder="Buscar"
+                   Type="text"
+                   BackgroundColor="#faf0d2"
+                   OutlineColor="#cec497"
+                   BorderRadius="0.375rem"
+                   Height="2.5rem">
+            <LeftIcon>
+                <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" />
+            </LeftIcon>
+        </AuthInput>
+    </div>
 </div>
 
 @code {
