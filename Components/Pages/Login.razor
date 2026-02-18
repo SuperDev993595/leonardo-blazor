@@ -13,24 +13,22 @@
                 <AuthInput Id="email"
                            Label="Correo Electrónico"
                            Placeholder="Escribe tu correo"
-                           InputType="email"
+                           InputType="InputType.Email"
                            LeftIconClass="fa-regular fa-envelope"
                            @bind-Value="model.Email" />
 
                 <AuthInput Id="password"
                            Label="Contraseña"
                            Placeholder="Escribe tu contraseña"
-                           InputType="password"
+                           InputType="InputType.Password"
                            LeftIconClass="fa-solid fa-lock"
                            ShowPasswordToggle="true"
-                           @bind-Value="model.Password">
-                    <BottomContent>
-                        <div class="auth-forgot">
-                            <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
-                        </div>
-                    </BottomContent>
-                </AuthInput>
-
+                           @bind-Value="model.Password"/>
+                <BottomContent>
+                    <div class="auth-forgot">
+                        <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
+                    </div>
+                </BottomContent>
                 <button type="submit" class="auth-submit-btn">Iniciar Sesión</button>
             </EditForm>
 

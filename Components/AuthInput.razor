@@ -1,4 +1,5 @@
-@* Reusable auth form field with optional left icon and password visibility toggle *@
+@using MudBlazor
+@* Reusable auth form field using MudBlazor while preserving the project's visual style *@
 <div class="form-group">
     <label for="@Id">@Label</label>
     <div class="input-wrapper">
@@ -6,30 +7,39 @@
         {
             <i class="@LeftIconClass left" aria-hidden="true"></i>
         }
-        <InputText id="@Id"
-                  @bind-Value="CurrentValue"
-                  class="auth-input"
-                  type="@ActualInputType"
-                  placeholder="@Placeholder" />
+
         @if (ShowPasswordToggle)
         {
-            <i class="fa-regular @(showPassword ? "fa-eye-slash" : "fa-eye") right"
-               @onclick="TogglePasswordVisibility"
-               role="button"
-               aria-label="Toggle password visibility"></i>
+            <MudTextField T="string"
+                          Id="@Id"
+                          @bind-Value="CurrentValue"
+                          Placeholder="@Placeholder"
+                          Variant="Variant.Text"
+                          InputClass="auth-input"
+                          InputType="@ActualInputType"
+                          Adornment="Adornment.End"
+                          AdornmentIcon="@(showPassword ? "fa-regular fa-eye-slash" : "fa-regular fa-eye")"
+                          OnAdornmentClick="TogglePasswordVisibility" />
         }
+        else
+        {
+            <MudTextField T="string"
+                          Id="@Id"
+                          @bind-Value="CurrentValue"
+                          Placeholder="@Placeholder"
+                          Variant="Variant.Text"
+                          InputClass="auth-input"
+                          InputType="@ActualInputType" />
+        }
+
     </div>
-    @if (BottomContent is not null)
-    {
-        @BottomContent
-    }
 </div>
 
 @code {
     [Parameter] public string Id { get; set; } = "";
     [Parameter] public string Label { get; set; } = "";
     [Parameter] public string Placeholder { get; set; } = "";
-    [Parameter] public string InputType { get; set; } = "text";
+    [Parameter] public InputType InputType { get; set; } = InputType.Text;
     [Parameter] public string? LeftIconClass { get; set; }
     [Parameter] public bool ShowPasswordToggle { get; set; }
     [Parameter] public RenderFragment? BottomContent { get; set; }
@@ -38,7 +48,7 @@
     [Parameter] public EventCallback<string?> ValueChanged { get; set; }
 
     private bool showPassword;
-    private string ActualInputType => ShowPasswordToggle ? (showPassword ? "text" : "password") : InputType;
+    private InputType ActualInputType => ShowPasswordToggle ? (showPassword ? InputType.Text : InputType.Password) : InputType;
 
     private string? CurrentValue
     {

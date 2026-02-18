@@ -59,18 +59,41 @@
 .auth-form .input-wrapper {
     position: relative;
     margin-top: 8px;
+    border: 2px solid #074344;
+    border-radius: 16px;
+    padding: 10px 14px;
+    box-sizing: border-box;
+    background: #fff;
 }
 
 .auth-form .input-wrapper .auth-input,
 .auth-form .input-wrapper input {
     width: 100%;
     padding: 14px 45px 14px 45px;
-    border-radius: 16px;
-    border: 2px solid #074344;
+    border-radius: 12px;
+    border: none;
     outline: none;
-    font-size: 14px;
+    font-size: 15px;
     font-family: "Poppins", sans-serif;
+    background: transparent;
     box-sizing: border-box;
+}
+
+/* Reduce size and change color of the password toggle (Mud adornment or plain right icon) */
+.auth-form .input-wrapper .mud-input-adornment,
+.auth-form .input-wrapper .mud-input-adornment .fa,
+.auth-form .input-wrapper .mud-input-adornment .mud-icon-root,
+.auth-form .input-wrapper .mud-input-adornment svg,
+.auth-form .input-wrapper i.right {
+    font-size: 18px !important;
+    color: #999 !important;
+    cursor: pointer;
+}
+
+/* Ensure SVG icons from MudBlazor are colored */
+.auth-form .input-wrapper .mud-input-adornment svg,
+.auth-form .input-wrapper .mud-input-adornment .mud-icon-root svg {
+    fill: #999 !important;
 }
 
 .auth-form .input-wrapper i.left {
