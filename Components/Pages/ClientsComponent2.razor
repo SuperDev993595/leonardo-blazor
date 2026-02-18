@@ -11,7 +11,11 @@
                 <MudIcon Icon="@Icons.Material.Outlined.UploadFile" Size="Size.Large" Class="client-upload-icon" />
                 <span class="client-upload-hint">Arrastra archivos acá</span>
                 <span class="client-upload-sep"></span>
-                <span class="client-btn-browse">Buscar archivos</span>
+                <MudButton Variant="Variant.Filled"
+                           Class="client-btn-browse"
+                           OnClick="OpenFilePicker">
+                    Buscar archivos
+                </MudButton>
             </div>
         </label>
         <div class="client-files-section">
@@ -25,9 +29,12 @@
                         <div class="client-file-progress-wrap">
                             <div class="client-file-progress-bar" style="width: @(file.Progress)%"></div>
                         </div>
-                        <button type="button" class="client-file-delete" @onclick="() => RemoveFile(file)" aria-label="Eliminar">
-                            <MudIcon Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" />
-                        </button>
+                        <MudIconButton Icon="@Icons.Material.Outlined.Delete"
+                                       Size="Size.Small"
+                                       Class="client-file-delete"
+                                       OnClick="() => RemoveFile(file)"
+                                       Title="Eliminar"
+                                       aria-label="Eliminar" />
                     </div>
                 }
                 @if (uploadedFiles.Count == 0)
@@ -38,16 +45,24 @@
         </div>
     </div>
     <div class="client-form-actions">
-        <button type="button" class="client-btn client-btn-skip" @onclick="OnOmitirClick">
+        <MudButton Variant="Variant.Filled"
+                   EndIcon="@Icons.Material.Outlined.Close"
+                   Class="client-btn client-btn-skip"
+                   FullWidth="true"
+                   OnClick="OnOmitirClick">
             Omitir
-            <MudIcon Icon="@Icons.Material.Outlined.Close" Size="Size.Small" Class="client-btn-icon" />
-        </button>
-        <button type="button" class="client-btn client-btn-next" @onclick="OnSiguienteClick">
+        </MudButton>
+        <MudButton Variant="Variant.Filled"
+                   EndIcon="@Icons.Material.Outlined.ArrowForward"
+                   Class="client-btn client-btn-next"
+                   FullWidth="true"
+                   OnClick="OnSiguienteClick">
             Siguiente
-            <MudIcon Icon="@Icons.Material.Outlined.ArrowForward" Size="Size.Small" Class="client-btn-icon" />
-        </button>
+        </MudButton>
     </div>
 </div>
+
+@inject IJSRuntime JS
 
 @code {
     private List<UploadedFileEntry> uploadedFiles = new();
@@ -58,6 +73,11 @@
 
     [Parameter]
     public EventCallback OnSiguiente { get; set; }
+
+    private async Task OpenFilePicker()
+    {
+        await JS.InvokeVoidAsync("eval", "document.getElementById('client-file-input')?.click()");
+    }
 
     private async Task OnFilesSelected(InputFileChangeEventArgs e)
     {

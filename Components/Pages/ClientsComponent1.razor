@@ -54,14 +54,20 @@
             </AuthInput>
         </div>
         <div class="client-form-actions">
-            <button type="button" class="client-btn client-btn-skip" @onclick="OnOmitirClick">
+            <MudButton Variant="Variant.Filled"
+                       EndIcon="@Icons.Material.Outlined.Close"
+                       Class="client-btn client-btn-skip"
+                       FullWidth="true"
+                       OnClick="OnOmitirClick">
                 Omitir
-                <MudIcon Icon="@Icons.Material.Outlined.Close" Size="Size.Small" Class="client-btn-icon" />
-            </button>
-            <button type="button" class="client-btn client-btn-next" @onclick="OnSiguienteClick">
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       EndIcon="@Icons.Material.Outlined.ArrowForward"
+                       Class="client-btn client-btn-next"
+                       FullWidth="true"
+                       OnClick="OnSiguienteClick">
                 Siguiente
-                <MudIcon Icon="@Icons.Material.Outlined.ArrowForward" Size="Size.Small" Class="client-btn-icon" />
-            </button>
+            </MudButton>
         </div>
     </EditForm>
 </div>

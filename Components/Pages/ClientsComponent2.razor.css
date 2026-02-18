@@ -75,21 +75,31 @@
     background: #ccc;
 }
 
-.client-btn-browse {
-    padding: 0.5rem 1.25rem;
-    border: none;
-    border-radius: 12px;
-    background: #ffc334;
-    color: #074344;
-    font-family: "Poppins", sans-serif;
-    font-size: 0.95rem;
-    font-weight: 600;
+/* Buscar archivos – override MudButton to keep our style */
+.client-btn-browse,
+.client-btn-browse ::deep .mud-button-root {
+    padding: 0.5rem 1.25rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: #ffc334 !important;
+    color: #074344 !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
     cursor: pointer;
     transition: opacity 0.2s;
 }
 
-.client-btn-browse:hover {
+.client-btn-browse:hover,
+.client-btn-browse:hover ::deep .mud-button-root {
+    background: #ffc334 !important;
     opacity: 0.9;
+}
+
+.client-btn-browse ::deep .mud-icon-root,
+.client-btn-browse ::deep svg {
+    color: #074344 !important;
+    fill: #074344 !important;
 }
 
 /* Right: file list */
@@ -155,21 +165,21 @@
     transition: width 0.2s ease;
 }
 
-.client-file-delete {
-    padding: 0.25rem;
-    border: none;
-    background: none;
+/* Delete button – override MudIconButton to keep our style */
+.client-file-delete,
+.client-file-delete ::deep .mud-icon-button-root {
+    padding: 0.25rem !important;
+    border: none !important;
+    background: none !important;
     cursor: pointer;
     color: #074344;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-radius: 6px;
     transition: background 0.2s;
 }
 
-.client-file-delete:hover {
-    background: rgba(7, 67, 68, 0.08);
+.client-file-delete:hover,
+.client-file-delete:hover ::deep .mud-icon-button-root {
+    background: rgba(7, 67, 68, 0.08) !important;
 }
 
 .client-file-delete ::deep .mud-icon-root,
@@ -178,36 +188,45 @@
     fill: #074344 !important;
 }
 
-/* Bottom actions – same as ClientsComponent1 */
+/* Bottom actions – same as ClientsComponent1, override MudButton */
 .client-form-actions {
     display: flex;
     gap: 1rem;
     justify-content: stretch;
 }
 
-.client-btn {
+.client-btn,
+.client-btn ::deep .mud-button-root {
     flex: 1;
-    display: inline-flex;
+    display: inline-flex !important;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    border-radius: 12px;
-    font-family: "Poppins", sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: 0.75rem 1.25rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
     cursor: pointer;
     transition: opacity 0.2s ease;
 }
 
-.client-btn:hover {
+.client-btn:hover,
+.client-btn:hover ::deep .mud-button-root {
     opacity: 0.9;
 }
 
-.client-btn-skip {
-    background-color: #074344;
-    color: white;
+.client-btn-skip,
+.client-btn-skip ::deep .mud-button-root {
+    background-color: #074344 !important;
+    color: white !important;
+}
+
+.client-btn-skip:hover,
+.client-btn-skip:hover ::deep .mud-button-root {
+    background-color: #074344 !important;
+    opacity: 0.9;
 }
 
 .client-btn-skip .client-btn-icon,
@@ -217,9 +236,16 @@
     fill: white !important;
 }
 
-.client-btn-next {
-    background-color: #ffc334;
-    color: #074344;
+.client-btn-next,
+.client-btn-next ::deep .mud-button-root {
+    background-color: #ffc334 !important;
+    color: #074344 !important;
+}
+
+.client-btn-next:hover,
+.client-btn-next:hover ::deep .mud-button-root {
+    background-color: #ffc334 !important;
+    opacity: 0.9;
 }
 
 .client-btn-next .client-btn-icon,

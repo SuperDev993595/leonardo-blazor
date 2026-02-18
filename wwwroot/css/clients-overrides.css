@@ -1,0 +1,112 @@
+/* Global overrides for Mud buttons in Clients components (scoped CSS does not apply to child components) */
+
+/* Shared button layout */
+.client-btn,
+.client-btn.mud-button-root {
+    flex: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.5rem !important;
+    padding: 0.75rem 1.25rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.client-btn:hover,
+.client-btn.mud-button-root:hover {
+    opacity: 0.9 !important;
+}
+
+/* Omitir – teal */
+.client-btn-skip,
+.client-btn-skip.mud-button-root {
+    background-color: #074344 !important;
+    color: white !important;
+}
+
+.client-btn-skip:hover,
+.client-btn-skip.mud-button-root:hover {
+    background-color: #074344 !important;
+    opacity: 0.9 !important;
+}
+
+.client-btn-skip .mud-icon-root,
+.client-btn-skip .mud-icon-root svg,
+.client-btn-skip svg {
+    color: white !important;
+    fill: white !important;
+}
+
+/* Siguiente – yellow */
+.client-btn-next,
+.client-btn-next.mud-button-root {
+    background-color: #ffc334 !important;
+    color: #074344 !important;
+}
+
+.client-btn-next:hover,
+.client-btn-next.mud-button-root:hover {
+    background-color: #ffc334 !important;
+    opacity: 0.9 !important;
+}
+
+.client-btn-next .mud-icon-root,
+.client-btn-next .mud-icon-root svg,
+.client-btn-next svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
+/* Buscar archivos – yellow */
+.client-btn-browse,
+.client-btn-browse.mud-button-root {
+    padding: 0.5rem 1.25rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    background: #ffc334 !important;
+    color: #074344 !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 0.95rem !important;
+    font-weight: 600 !important;
+}
+
+.client-btn-browse:hover,
+.client-btn-browse.mud-button-root:hover {
+    background: #ffc334 !important;
+    opacity: 0.9 !important;
+}
+
+.client-btn-browse .mud-icon-root,
+.client-btn-browse .mud-icon-root svg,
+.client-btn-browse svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
+/* Delete icon button */
+.client-file-delete,
+.client-file-delete.mud-icon-button-root {
+    padding: 0.25rem !important;
+    border: none !important;
+    background: none !important;
+    color: #074344 !important;
+    border-radius: 6px !important;
+    transition: background 0.2s !important;
+}
+
+.client-file-delete:hover,
+.client-file-delete.mud-icon-button-root:hover {
+    background: rgba(7, 67, 68, 0.08) !important;
+}
+
+.client-file-delete .mud-icon-root,
+.client-file-delete .mud-icon-root svg,
+.client-file-delete svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
