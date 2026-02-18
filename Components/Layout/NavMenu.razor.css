@@ -76,9 +76,14 @@
     color: #acc295 !important;
 }
 
+/* Section label: text aligned with menu items; divider full width (unchanged look) */
 .nav-section-label {
+    position: relative;
     margin-top: 2rem;
     margin-bottom: 0.5rem;
+    padding-top: calc(1px + 0.5rem); /* space for divider line + gap */
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
     font-size: 0.65rem;
     font-weight: 500;
     text-transform: uppercase;
@@ -86,11 +91,14 @@
     letter-spacing: 0.05em;
 }
 
+/* Divider: full width (extends past label padding), same line as before */
 .nav-section-label::before {
     content: "";
-    display: block;
+    position: absolute;
+    left: -0.75rem;
+    right: -0.75rem;
+    top: 0;
     border-top: 1px solid #e5e7eb;
-    margin-bottom: 0.5rem;
 }
 
 .sidebar-footer {

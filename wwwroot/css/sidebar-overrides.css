@@ -16,6 +16,7 @@
 #layout-sidebar .sidebar-nav-active,
 #layout-sidebar .sidebar-nav-active.mud-nav-link,
 #layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link {
+    width: calc(100% - 1.25rem) !important;
     background-color: var(--mud-palette-primary, #115e59) !important;
     color: var(--mud-palette-primary-contrast, white) !important;
     border-radius: 0.575rem !important;
