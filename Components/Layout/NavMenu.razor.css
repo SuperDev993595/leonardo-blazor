@@ -53,6 +53,13 @@
     letter-spacing: 0.05em;
 }
 
+.nav-section-label::before {
+    content: "";
+    display: block;
+    border-top: 1px solid #e5e7eb;
+    margin-bottom: 0.5rem;
+}
+
 .sidebar-footer {
     font-size: 0.75rem;
     color: #9ca3af;
