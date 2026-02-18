@@ -1,0 +1,89 @@
+@using MudBlazor
+@rendermode InteractiveServer
+
+<div class="client-form-card">
+    <EditForm Model="@Model" class="client-form">
+        <div class="client-form-fields">
+            <AuthInput Id="nombre-empresa"
+                       Label="Nombre de la Empresa"
+                       Placeholder="Escribe el nombre de tu empresa"
+                       OutlineColor="#074344"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       LeftIconColor="#074344"
+                       @bind-Value="Model.NombreEmpresa">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.TextFields" Size="Size.Small" />
+                </LeftIcon>
+            </AuthInput>
+            <AuthInput Id="razon-social"
+                       Label="Razón Social"
+                       Placeholder="Escribe tu razón social"
+                       OutlineColor="#074344"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       LeftIconColor="#074344"
+                       @bind-Value="Model.RazonSocial">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.TextFields" Size="Size.Small" />
+                </LeftIcon>
+            </AuthInput>
+            <AuthInput Id="tax-id"
+                       Label="TAX ID"
+                       Placeholder="TAX ID"
+                       OutlineColor="#074344"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       LeftIconColor="#074344"
+                       @bind-Value="Model.TaxId">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.TextFields" Size="Size.Small" />
+                </LeftIcon>
+            </AuthInput>
+            <AuthInput Id="tax-id-2"
+                       Label="TAX ID 2"
+                       Placeholder="TAX ID 2"
+                       OutlineColor="#074344"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       LeftIconColor="#074344"
+                       @bind-Value="Model.TaxId2">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.TextFields" Size="Size.Small" />
+                </LeftIcon>
+            </AuthInput>
+        </div>
+        <div class="client-form-actions">
+            <button type="button" class="client-btn client-btn-skip" @onclick="OnOmitirClick">
+                Omitir
+                <MudIcon Icon="@Icons.Material.Outlined.Close" Size="Size.Small" Class="client-btn-icon" />
+            </button>
+            <button type="button" class="client-btn client-btn-next" @onclick="OnSiguienteClick">
+                Siguiente
+                <MudIcon Icon="@Icons.Material.Outlined.ArrowForward" Size="Size.Small" Class="client-btn-icon" />
+            </button>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public ClientFormModel Model { get; set; } = new();
+
+    [Parameter]
+    public EventCallback OnOmitir { get; set; }
+
+    [Parameter]
+    public EventCallback OnSiguiente { get; set; }
+
+    private async Task OnOmitirClick() => await OnOmitir.InvokeAsync();
+    private async Task OnSiguienteClick() => await OnSiguiente.InvokeAsync();
+
+    public class ClientFormModel
+    {
+        public string NombreEmpresa { get; set; } = "";
+        public string RazonSocial { get; set; } = "";
+        public string TaxId { get; set; } = "";
+        public string TaxId2 { get; set; } = "";
+    }
+}
