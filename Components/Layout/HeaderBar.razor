@@ -1,7 +1,9 @@
 @using MudBlazor
+@rendermode InteractiveServer
+@inject IJSRuntime JS
 
 <div class="header-bar">
-    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="OnToggleClick" aria-label="Toggle sidebar" class="header-bar-menu" />
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="ToggleSidebar" aria-label="Toggle sidebar" class="header-bar-menu" />
     <div class="header-bar-spacer"></div>
     <div class="header-bar-search">
         <AuthInput @bind-Value="_searchText"
@@ -9,8 +11,8 @@
                    Type="text"
                    BackgroundColor="#faf0d2"
                    OutlineColor="#cec497"
-                   BorderRadius="0.375rem"
-                   Height="2.5rem">
+                   BorderRadius="1.0rem"
+                   Height="2.0rem">
             <LeftIcon>
                 <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" />
             </LeftIcon>
@@ -19,9 +21,8 @@
 </div>
 
 @code {
-    [Parameter] public EventCallback OnToggleSidebar { get; set; }
-
     private string _searchText = string.Empty;
 
-    private async Task OnToggleClick() => await OnToggleSidebar.InvokeAsync();
+    private async Task ToggleSidebar() =>
+        await JS.InvokeVoidAsync("toggleSidebar");
 }
