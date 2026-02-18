@@ -6,7 +6,7 @@
     <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="ToggleSidebar" aria-label="Toggle sidebar" class="header-bar-menu" />
     <div class="header-bar-spacer"></div>
     <div class="header-bar-search">
-        <AuthInput @bind-Value="_searchText"
+        <IconInput @bind-Value="_searchText"
                    Placeholder="Buscar"
                    Type="text"
                    BackgroundColor="#faf0d2"
@@ -16,7 +16,7 @@
             <LeftIcon>
                 <MudIcon Icon="@Icons.Material.Filled.Search" Size="Size.Small" />
             </LeftIcon>
-        </AuthInput>
+        </IconInput>
     </div>
 </div>
 

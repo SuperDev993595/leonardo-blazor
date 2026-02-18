@@ -13,20 +13,20 @@
     margin-bottom: 2rem;
 }
 
-.client-form-card ::deep .auth-input-icon {
+.client-form-card ::deep .icon-input-icon {
     background-color: #f0d78c;
     border-radius: 8px;
     padding: 0.35rem;
     margin-right: 0.75rem;
 }
 
-.client-form-card ::deep .auth-input-icon.auth-input-icon-colored,
-.client-form-card ::deep .auth-input-icon svg {
+.client-form-card ::deep .icon-input-icon.icon-input-icon-colored,
+.client-form-card ::deep .icon-input-icon svg {
     color: #074344;
     fill: #074344;
 }
 
-.client-form-card ::deep .auth-input-label {
+.client-form-card ::deep .icon-input-label {
     font-weight: 600;
     color: #333;
 }

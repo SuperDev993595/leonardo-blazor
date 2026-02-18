@@ -11,7 +11,7 @@
 
             <EditForm Model="@model" OnValidSubmit="HandleLogin" class="auth-form">
                 <div class="auth-form-fields">
-                <AuthInput Id="email"
+                <IconInput Id="email"
                            Label="Correo Electrónico"
                            Placeholder="Escribe tu correo"
                            InputType="InputType.Email"
@@ -22,7 +22,7 @@
                            BorderWidth="2px"
                            @bind-Value="model.Email" />
 
-                <AuthInput Id="password"
+                <IconInput Id="password"
                            Label="Contraseña"
                            Placeholder="Escribe tu contraseña"
                            InputType="InputType.Password"
@@ -38,7 +38,7 @@
                             <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
                         </div>
                     </BottomContent>
-                </AuthInput>
+                </IconInput>
                 </div>
                 <button type="submit" class="auth-submit-btn">Iniciar Sesión</button>
             </EditForm>

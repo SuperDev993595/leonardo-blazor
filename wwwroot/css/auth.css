@@ -66,7 +66,8 @@
     background: #fff;
 }
 
-.auth-form .input-wrapper .auth-input,
+.auth-form .input-wrapper .icon-input-root,
+.auth-form .input-wrapper .icon-input-field,
 .auth-form .input-wrapper input {
     width: 100%;
     padding: 14px 45px 14px 45px;

@@ -1,13 +1,13 @@
 @* Reusable outlined input with optional left icon and customizable styling *@
-<div class="auth-input-root">
+<div class="icon-input-root">
     @if (!string.IsNullOrEmpty(Label))
     {
-        <label for="@Id" class="auth-input-label">@Label</label>
+        <label for="@Id" class="icon-input-label">@Label</label>
     }
-    <div class="auth-input-wrapper @(_focused ? "focused" : "")" style="@WrapperStyle">
+    <div class="icon-input-wrapper @(_focused ? "focused" : "")" style="@WrapperStyle">
         @if (LeftIcon != null || !string.IsNullOrEmpty(LeftIconClass))
         {
-            <div class="auth-input-icon @(string.IsNullOrEmpty(LeftIconColor) ? "" : "auth-input-icon-colored")" style="@IconStyle">
+            <div class="icon-input-icon @(string.IsNullOrEmpty(LeftIconColor) ? "" : "icon-input-icon-colored")" style="@IconStyle">
                 @if (LeftIcon != null)
                 {
                     @LeftIcon
@@ -20,7 +20,7 @@
         }
         <input id="@Id"
                type="@ActualInputType"
-               class="auth-input-field"
+               class="icon-input-field"
                placeholder="@Placeholder"
                value="@Value"
                @oninput="OnInput"
@@ -29,7 +29,7 @@
         @if (ShowPasswordToggle)
         {
             <button type="button"
-                    class="auth-input-toggle"
+                    class="icon-input-toggle"
                     aria-label="@(showPassword ? "Ocultar contraseña" : "Mostrar contraseña")"
                     @onclick="TogglePasswordVisibility">
                 <MudIcon Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)" Size="Size.Small" />

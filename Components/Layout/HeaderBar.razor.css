@@ -25,6 +25,6 @@
     max-width: 20rem;
 }
 
-.header-bar-search ::deep .auth-input-field {
+.header-bar-search ::deep .icon-input-field {
     font-size: 0.875rem;
 }
