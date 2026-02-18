@@ -1,0 +1,22 @@
+@using MudBlazor
+
+<div class="header-bar">
+    <MudIconButton Icon="@Icons.Material.Filled.Menu" OnClick="OnToggleClick" aria-label="Toggle sidebar" class="header-bar-menu" />
+    <div class="header-bar-spacer"></div>
+    <MudTextField @bind-Value="_searchText"
+                  Placeholder="Buscar"
+                  Adornment="Adornment.Start"
+                  AdornmentIcon="@Icons.Material.Filled.Search"
+                  IconSize="Size.Small"
+                  Variant="Variant.Outlined"
+                  Class="header-bar-search"
+                  Immediate="true" />
+</div>
+
+@code {
+    [Parameter] public EventCallback OnToggleSidebar { get; set; }
+
+    private string _searchText = string.Empty;
+
+    private async Task OnToggleClick() => await OnToggleSidebar.InvokeAsync();
+}
