@@ -13,9 +13,13 @@
                            OnOmitir="OnOmitir"
                            OnSiguiente="OnSiguiente" />
     }
+    else if (currentStep == 2)
+    {
+        <ClientsComponent2 OnOmitir="OnOmitir"
+                           OnSiguiente="OnSiguiente" />
+    }
     else
     {
-        @* Render other component(s) here when step > 1 *@
         <div class="client-form-card">
             <p>Step @currentStep – Add your next component here.</p>
         </div>

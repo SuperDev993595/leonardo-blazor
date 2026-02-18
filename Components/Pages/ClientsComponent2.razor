@@ -1,0 +1,95 @@
+@using MudBlazor
+@rendermode InteractiveServer
+
+<div class="client-form-card client-upload-card">
+    <div class="client-upload-layout">
+        <label for="client-file-input" class="client-upload-zone">
+            <InputFile id="client-file-input" multiple
+                       class="client-upload-input-hidden"
+                       OnChange="OnFilesSelected" />
+            <div class="client-upload-zone-inner">
+                <MudIcon Icon="@Icons.Material.Outlined.UploadFile" Size="Size.Large" Class="client-upload-icon" />
+                <span class="client-upload-hint">Arrastra archivos acá</span>
+                <span class="client-upload-sep"></span>
+                <span class="client-btn-browse">Buscar archivos</span>
+            </div>
+        </label>
+        <div class="client-files-section">
+            <h3 class="client-files-title">Archivos Cargados</h3>
+            <div class="client-files-list">
+                @foreach (var file in uploadedFiles)
+                {
+                    <div class="client-file-item">
+                        <MudIcon Icon="@Icons.Material.Outlined.Description" Size="Size.Small" Class="client-file-icon" />
+                        <span class="client-file-name">@file.Name</span>
+                        <div class="client-file-progress-wrap">
+                            <div class="client-file-progress-bar" style="width: @(file.Progress)%"></div>
+                        </div>
+                        <button type="button" class="client-file-delete" @onclick="() => RemoveFile(file)" aria-label="Eliminar">
+                            <MudIcon Icon="@Icons.Material.Outlined.Delete" Size="Size.Small" />
+                        </button>
+                    </div>
+                }
+                @if (uploadedFiles.Count == 0)
+                {
+                    <p class="client-files-empty">No hay archivos cargados</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="client-form-actions">
+        <button type="button" class="client-btn client-btn-skip" @onclick="OnOmitirClick">
+            Omitir
+            <MudIcon Icon="@Icons.Material.Outlined.Close" Size="Size.Small" Class="client-btn-icon" />
+        </button>
+        <button type="button" class="client-btn client-btn-next" @onclick="OnSiguienteClick">
+            Siguiente
+            <MudIcon Icon="@Icons.Material.Outlined.ArrowForward" Size="Size.Small" Class="client-btn-icon" />
+        </button>
+    </div>
+</div>
+
+@code {
+    private List<UploadedFileEntry> uploadedFiles = new();
+    private int nextId;
+
+    [Parameter]
+    public EventCallback OnOmitir { get; set; }
+
+    [Parameter]
+    public EventCallback OnSiguiente { get; set; }
+
+    private async Task OnFilesSelected(InputFileChangeEventArgs e)
+    {
+        foreach (var file in e.GetMultipleFiles())
+        {
+            var entry = new UploadedFileEntry { Id = ++nextId, Name = file.Name, Progress = 0 };
+            uploadedFiles.Add(entry);
+            StateHasChanged();
+            // Simulate upload progress
+            for (var p = 0; p <= 100; p += 15)
+            {
+                entry.Progress = Math.Min(p, 100);
+                StateHasChanged();
+                await Task.Delay(80);
+            }
+            entry.Progress = 100;
+            StateHasChanged();
+        }
+    }
+
+    private void RemoveFile(UploadedFileEntry file)
+    {
+        uploadedFiles.Remove(file);
+    }
+
+    private async Task OnOmitirClick() => await OnOmitir.InvokeAsync();
+    private async Task OnSiguienteClick() => await OnSiguiente.InvokeAsync();
+
+    private class UploadedFileEntry
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = "";
+        public int Progress { get; set; }
+    }
+}
