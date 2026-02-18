@@ -1,0 +1,8 @@
+/* Loaded last so sidebar nav font-size overrides MudBlazor and scoped CSS */
+#layout-sidebar .mud-nav-link,
+#layout-sidebar .mud-nav-link .mud-nav-link-text,
+#layout-sidebar .mud-nav-link .mud-typography,
+#layout-sidebar .mud-nav-link span,
+#layout-sidebar .mud-nav-link * {
+    font-size: 0.875rem !important;
+}

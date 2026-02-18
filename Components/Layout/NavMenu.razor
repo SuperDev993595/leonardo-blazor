@@ -1,30 +1,34 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Leonardo</a>
+@using MudBlazor
+
+<aside id="layout-sidebar" class="sidebar-inner">
+    <div class="sidebar-content">
+        <div class="sidebar-logo">LOGO</div>
+
+        <MudNavMenu class="sidebar-nav" Match="NavLinkMatch.Prefix">
+            <MudNavLink href="dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard" IconColor="Color.Default">
+                Vista General
+            </MudNavLink>
+
+            <div class="nav-section-label">Principal</div>
+            <MudNavLink href="aseguradoras" Icon="@Icons.Material.Outlined.Shield" IconColor="Color.Default">Aseguradoras</MudNavLink>
+            <MudNavLink href="facturacion" Icon="@Icons.Material.Outlined.CreditCard" IconColor="Color.Default">Facturación</MudNavLink>
+            <MudNavLink href="reportes" Icon="@Icons.Material.Outlined.Assessment" IconColor="Color.Default">Reportes</MudNavLink>
+            <MudNavLink href="clients" Icon="@Icons.Material.Outlined.People" IconColor="Color.Default">Clientes</MudNavLink>
+            <MudNavLink href="polizas" Icon="@Icons.Material.Outlined.Description" IconColor="Color.Default">Pólizas</MudNavLink>
+            <MudNavLink href="siniestros" Icon="@Icons.Material.Outlined.FlashOn" IconColor="Color.Default">Siniestros</MudNavLink>
+
+            <div class="nav-section-label">Personal</div>
+            <MudNavLink href="usuario" Icon="@Icons.Material.Outlined.Person" IconColor="Color.Default">Usuario</MudNavLink>
+            <MudNavLink href="mi-organizacion" Icon="@Icons.Material.Outlined.Business" IconColor="Color.Default">Mi Organización</MudNavLink>
+            <MudNavLink href="mi-equipo" Icon="@Icons.Material.Outlined.Groups" IconColor="Color.Default">Mi equipo</MudNavLink>
+
+            <div class="nav-section-label">Sistema</div>
+            <MudNavLink href="ajustes" Icon="@Icons.Material.Outlined.Settings" IconColor="Color.Default">Ajustes</MudNavLink>
+            <MudNavLink href="#" Icon="@Icons.Material.Outlined.Logout" IconColor="Color.Default">Cerrar Sesión</MudNavLink>
+        </MudNavMenu>
     </div>
-</div>
 
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="weather">
-                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Weather
-            </NavLink>
-        </div>
-    </nav>
-</div>
-
+    <div class="sidebar-footer">
+        Av Seguro | Todos los derechos reservados
+    </div>
+</aside>
