@@ -6,3 +6,19 @@
 #layout-sidebar .mud-nav-link * {
     font-size: 0.875rem !important;
 }
+
+/* Active menu item - theme-consistent, rounded background */
+#layout-sidebar .sidebar-nav-active,
+#layout-sidebar .sidebar-nav-active.mud-nav-link,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link {
+    background-color: var(--mud-palette-primary, #115e59) !important;
+    color: var(--mud-palette-primary-contrast, white) !important;
+    border-radius: 0.575rem !important;
+}
+#layout-sidebar .sidebar-nav-active .mud-nav-link-text,
+#layout-sidebar .sidebar-nav-active .mud-typography,
+#layout-sidebar .sidebar-nav-active span,
+#layout-sidebar .sidebar-nav-active *,
+#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link * {
+    color: var(--mud-palette-primary-contrast, white) !important;
+}

@@ -1,28 +1,31 @@
 @using MudBlazor
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@implements IDisposable
 
 <aside id="layout-sidebar" class="sidebar-inner">
     <div class="sidebar-logo">LOGO</div>
     <div class="sidebar-content">
         <MudNavMenu class="sidebar-nav" Match="NavLinkMatch.Prefix">
-            <MudNavLink href="dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard" IconColor="Color.Default">
+            <MudNavLink href="dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Outlined.Dashboard" IconColor="Color.Default" Class="@GetActiveClass("dashboard", NavLinkMatch.All)">
                 Vista General
             </MudNavLink>
 
             <div class="nav-section-label">Principal</div>
-            <MudNavLink href="aseguradoras" Icon="@Icons.Material.Outlined.Shield" IconColor="Color.Default">Aseguradoras</MudNavLink>
-            <MudNavLink href="facturacion" Icon="@Icons.Material.Outlined.CreditCard" IconColor="Color.Default">Facturación</MudNavLink>
-            <MudNavLink href="reportes" Icon="@Icons.Material.Outlined.Assessment" IconColor="Color.Default">Reportes</MudNavLink>
-            <MudNavLink href="clients" Icon="@Icons.Material.Outlined.People" IconColor="Color.Default">Clientes</MudNavLink>
-            <MudNavLink href="polizas" Icon="@Icons.Material.Outlined.Description" IconColor="Color.Default">Pólizas</MudNavLink>
-            <MudNavLink href="siniestros" Icon="@Icons.Material.Outlined.FlashOn" IconColor="Color.Default">Siniestros</MudNavLink>
+            <MudNavLink href="aseguradoras" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Shield" IconColor="Color.Default" Class="@GetActiveClass("aseguradoras", NavLinkMatch.Prefix)">Aseguradoras</MudNavLink>
+            <MudNavLink href="facturacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.CreditCard" IconColor="Color.Default" Class="@GetActiveClass("facturacion", NavLinkMatch.Prefix)">Facturación</MudNavLink>
+            <MudNavLink href="reportes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Assessment" IconColor="Color.Default" Class="@GetActiveClass("reportes", NavLinkMatch.Prefix)">Reportes</MudNavLink>
+            <MudNavLink href="clients" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.People" IconColor="Color.Default" Class="@GetActiveClass("clients", NavLinkMatch.Prefix)">Clientes</MudNavLink>
+            <MudNavLink href="polizas" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Description" IconColor="Color.Default" Class="@GetActiveClass("polizas", NavLinkMatch.Prefix)">Pólizas</MudNavLink>
+            <MudNavLink href="siniestros" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.FlashOn" IconColor="Color.Default" Class="@GetActiveClass("siniestros", NavLinkMatch.Prefix)">Siniestros</MudNavLink>
 
             <div class="nav-section-label">Personal</div>
-            <MudNavLink href="usuario" Icon="@Icons.Material.Outlined.Person" IconColor="Color.Default">Usuario</MudNavLink>
-            <MudNavLink href="mi-organizacion" Icon="@Icons.Material.Outlined.Business" IconColor="Color.Default">Mi Organización</MudNavLink>
-            <MudNavLink href="mi-equipo" Icon="@Icons.Material.Outlined.Groups" IconColor="Color.Default">Mi equipo</MudNavLink>
+            <MudNavLink href="usuario" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Person" IconColor="Color.Default" Class="@GetActiveClass("usuario", NavLinkMatch.Prefix)">Usuario</MudNavLink>
+            <MudNavLink href="mi-organizacion" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Business" IconColor="Color.Default" Class="@GetActiveClass("mi-organizacion", NavLinkMatch.Prefix)">Mi Organización</MudNavLink>
+            <MudNavLink href="mi-equipo" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Groups" IconColor="Color.Default" Class="@GetActiveClass("mi-equipo", NavLinkMatch.Prefix)">Mi equipo</MudNavLink>
 
             <div class="nav-section-label">Sistema</div>
-            <MudNavLink href="ajustes" Icon="@Icons.Material.Outlined.Settings" IconColor="Color.Default">Ajustes</MudNavLink>
+            <MudNavLink href="ajustes" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Settings" IconColor="Color.Default" Class="@GetActiveClass("ajustes", NavLinkMatch.Prefix)">Ajustes</MudNavLink>
             <MudNavLink href="#" Icon="@Icons.Material.Outlined.Logout" IconColor="Color.Default">Cerrar Sesión</MudNavLink>
         </MudNavMenu>
     </div>
@@ -31,3 +34,42 @@
         Av Seguro | Todos los derechos reservados
     </div>
 </aside>
+
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.LocationChanged += OnLocationChanged;
+    }
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        Navigation.LocationChanged -= OnLocationChanged;
+    }
+
+    /// <summary>
+    /// Returns the active CSS class when the current route matches this link (exact or prefix).
+    /// Ensures only one menu item is active at a time based on URL.
+    /// </summary>
+    private string GetActiveClass(string path, NavLinkMatch match)
+    {
+        var normalizedPath = path.TrimStart('/');
+        var relativePath = Navigation.ToBaseRelativePath(Navigation.Uri);
+        var queryIndex = relativePath.IndexOf('?');
+        var currentPath = (queryIndex >= 0 ? relativePath[..queryIndex] : relativePath).Trim('/');
+
+        if (string.IsNullOrEmpty(currentPath))
+            return match == NavLinkMatch.All && string.IsNullOrEmpty(normalizedPath) ? "sidebar-nav-active" : "";
+
+        var isExact = string.Equals(currentPath, normalizedPath, StringComparison.OrdinalIgnoreCase);
+        var isPrefix = currentPath.StartsWith(normalizedPath + "/", StringComparison.OrdinalIgnoreCase);
+
+        if (match == NavLinkMatch.All)
+            return isExact ? "sidebar-nav-active" : "";
+        return (isExact || isPrefix) ? "sidebar-nav-active" : "";
+    }
+}
