@@ -1,5 +1,23 @@
 /* Global overrides for Mud buttons in Clients components (scoped CSS does not apply to child components) */
 
+/* Upload zone icon (MudIcon in ClientsComponent2 drop zone) */
+.client-upload-icon,
+.client-upload-icon.mud-icon-root,
+.client-upload-icon .mud-icon-root,
+.client-upload-icon svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
+/* File list icon color (MudIcon in ClientsComponent2) */
+.client-file-icon,
+.client-file-icon.mud-icon-root,
+.client-file-icon .mud-icon-root,
+.client-file-icon svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
 /* Shared button layout */
 .client-btn,
 .client-btn.mud-button-root {
@@ -109,4 +127,26 @@
 .client-file-delete svg {
     color: #074344 !important;
     fill: #074344 !important;
+}
+
+/* Sidebar: active menu item icon = yellow (loaded last to override Mud + theme).
+   Target both (1) link that has .sidebar-nav-active and (2) link inside an ancestor with .sidebar-nav-active. */
+#layout-sidebar .sidebar-nav-active .mud-icon-root,
+#layout-sidebar .sidebar-nav-active .mud-icon,
+#layout-sidebar .sidebar-nav-active .mud-icon-root svg,
+#layout-sidebar .sidebar-nav-active .mud-icon svg,
+#layout-sidebar .sidebar-nav-active .mud-nav-link .mud-icon-root,
+#layout-sidebar .sidebar-nav-active .mud-nav-link .mud-icon-root svg,
+#layout-sidebar .sidebar-nav-active .mud-nav-link .mud-icon,
+#layout-sidebar .sidebar-nav-active .mud-nav-link .mud-icon svg,
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon-root,
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon-root svg,
+#layout-sidebar .mud-nav-link.active .mud-icon-root,
+#layout-sidebar .mud-nav-link.active .mud-icon-root svg,
+#layout-sidebar .mud-nav-link.mud-nav-link-active .mud-icon-root,
+#layout-sidebar .mud-nav-link.mud-nav-link-active .mud-icon-root svg,
+#layout-sidebar .sidebar-nav-active svg,
+#layout-sidebar .sidebar-nav-active [class*="mud-icon"] {
+    color: #ffc334 !important;
+    fill: #ffc334 !important;
 }

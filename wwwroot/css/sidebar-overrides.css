@@ -7,6 +7,13 @@
     font-size: 0.875rem !important;
 }
 
+/* Normal (non-active) menu item color */
+#layout-sidebar .mud-nav-link:not(.sidebar-nav-active) .mud-icon-root,
+#layout-sidebar .mud-nav-link:not(.sidebar-nav-active) .mud-icon-root svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
 /* Larger menu item icons (do not shrink with generic rule above) */
 #layout-sidebar .mud-nav-link .mud-icon-root {
     font-size: 1.375rem !important;
@@ -29,17 +36,17 @@
     color: var(--mud-palette-primary-contrast, white) !important;
 }
 
-/* Active menu item icon color - icon root, inner icon class, and SVG fill */
-#layout-sidebar .sidebar-nav-active .mud-icon-root,
-#layout-sidebar .sidebar-nav-active .mud-icon,
-#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon-root,
-#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon {
-    color: #b6bb73 !important;
+/* Active menu item icon color – must override MudBlazor primary and NavMenu scoped */
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon-root,
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon,
+#layout-sidebar .mud-nav-item .mud-nav-link.sidebar-nav-active .mud-icon-root,
+#layout-sidebar .mud-nav-item .mud-nav-link.sidebar-nav-active .mud-icon {
+    color: #ffc334 !important;
 }
-#layout-sidebar .sidebar-nav-active .mud-icon-root svg,
-#layout-sidebar .sidebar-nav-active .mud-icon svg,
-#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon-root svg,
-#layout-sidebar .mud-nav-item.sidebar-nav-active .mud-nav-link .mud-icon svg {
-    fill: #b6bb73 !important;
-    color: #b6bb73 !important;
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon-root svg,
+#layout-sidebar .mud-nav-link.sidebar-nav-active .mud-icon svg,
+#layout-sidebar .mud-nav-item .mud-nav-link.sidebar-nav-active .mud-icon-root svg,
+#layout-sidebar .mud-nav-item .mud-nav-link.sidebar-nav-active .mud-icon svg {
+    fill: #ffc334 !important;
+    color: #ffc334 !important;
 }

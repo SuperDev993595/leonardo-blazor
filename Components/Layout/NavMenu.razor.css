@@ -69,12 +69,12 @@
 .sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon,
 .sidebar-nav ::deep .mud-nav-link.active .mud-icon-root,
 .sidebar-nav ::deep .mud-nav-link.mud-nav-link-active .mud-icon-root {
-    color: #acc295 !important;
+    color: #ffc334 !important;
 }
 .sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon-root svg,
 .sidebar-nav ::deep .mud-nav-link.sidebar-nav-active .mud-icon svg {
-    fill: #acc295 !important;
-    color: #acc295 !important;
+    fill: #ffc334 !important;
+    color: #ffc334 !important;
 }
 
 /* Section label: text aligned with menu items; divider full width (unchanged look) */
