@@ -138,7 +138,8 @@
     padding: 15px;
     border: none;
     border-radius: 16px;
-    background: #ffc334;
+    background: #ffc334 !important;
+    color: #333 !important;
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
@@ -148,7 +149,34 @@
 }
 
 .auth-submit-btn:hover {
-    background: #e6b12f;
+    background: #e6b12f !important;
+    color: #333 !important;
+}
+
+.auth-submit-btn .mud-button-label,
+.auth-submit-btn .mud-icon-root {
+    color: inherit !important;
+}
+
+/* Next step button - dark teal (Step 1) */
+.auth-next-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 16px;
+    background: #074344 !important;
+    color: white !important;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 25px;
+    transition: 0.3s ease;
+    font-family: "Poppins", sans-serif;
+}
+
+.auth-next-btn:hover {
+    background: #062f30 !important;
+    color: white !important;
 }
 
 /* Divider: "También puedes" with horizontal lines */

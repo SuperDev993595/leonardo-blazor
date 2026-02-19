@@ -7,74 +7,134 @@
 <div class="auth-screen">
     <div class="auth-container">
         <div class="auth-form-card">
-            <h1 class="auth-title">Crear cuenta</h1>
-            <p class="auth-subtitle">Regístrate para acceder a la plataforma</p>
+            <h1 class="auth-title">Completa tu Registro</h1>
+            <p class="auth-subtitle">Llena los siguientes campos para crear tu cuenta</p>
 
-            <EditForm Model="@model" OnValidSubmit="HandleRegister" class="auth-form">
-                <div class="form-group">
-                <MudTextField @bind-Value="model.FullName"
-                              Label="Nombre completo"
-                              Placeholder="Escribe tu nombre"
-                              Variant="Variant.Text"
-                              Class="auth-field"
-                              Margin="Margin.None" />
-                </div>
+            @* Step 1: Nombres, Apellidos, Nombre de Usuario *@
+            @if (currentStep == 1)
+            {
+                <EditForm Model="@model" class="auth-form">
+                    <div class="auth-form-fields">
+                        <div class="form-group">
+                            <IconInput Id="nombres"
+                                       Label="Nombres"
+                                       Placeholder="Escribe tus nombres"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       @bind-Value="model.Nombres">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                        <div class="form-group">
+                            <IconInput Id="apellidos"
+                                       Label="Apellidos"
+                                       Placeholder="Escribe tus apellidos"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       @bind-Value="model.Apellidos">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                        <div class="form-group">
+                            <IconInput Id="nombre-usuario"
+                                       Label="Nombre de Usuario"
+                                       Placeholder="Escribe tu nombre de usuario"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       @bind-Value="model.NombreUsuario">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                    </div>
+                    <MudButton Variant="Variant.Filled"
+                              FullWidth="true"
+                              Size="Size.Large"
+                              Class="auth-next-btn"
+                              OnClick="GoToStep2">
+                        Siguiente
+                        <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Class="ms-2" />
+                    </MudButton>
+                </EditForm>
+            }
 
-                <div class="form-group">
-                <MudTextField @bind-Value="model.Email"
-                              Label="Correo Electrónico"
-                              Placeholder="Escribe tu correo"
-                              Variant="Variant.Text"
-                              Class="auth-field"
-                              Margin="Margin.None" />
-                </div>
-
-                <div class="form-group">
-                <MudTextField @bind-Value="model.Password"
-                              Label="Contraseña"
-                              Placeholder="Escribe tu contraseña"
-                              InputType="@(showPassword ? InputType.Text : InputType.Password)"
-                              Variant="Variant.Text"
-                              Class="auth-field"
-                              Margin="Margin.None">
-                    <AdornmentEnd>
-                        <MudIconButton Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
-                                       OnClick="@(() => { showPassword = !showPassword; })"
-                                       Color="Color.Default" />
-                    </AdornmentEnd>
-                </MudTextField>
-                </div>
-
-                <div class="form-group">
-                <MudTextField @bind-Value="model.ConfirmPassword"
-                              Label="Confirmar contraseña"
-                              Placeholder="Repite tu contraseña"
-                              InputType="@(showConfirmPassword ? InputType.Text : InputType.Password)"
-                              Variant="Variant.Text"
-                              Class="auth-field"
-                              Margin="Margin.None">
-                    <AdornmentEnd>
-                        <MudIconButton Icon="@(showConfirmPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
-                                       OnClick="@(() => { showConfirmPassword = !showConfirmPassword; })"
-                                       Color="Color.Default" />
-                    </AdornmentEnd>
-                </MudTextField>
-                </div>
-
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Warning"
-                           FullWidth="true"
-                           Size="Size.Large"
-                           Class="auth-submit-btn"
-                           ButtonType="ButtonType.Submit">
-                    Registrarse
-                </MudButton>
-            </EditForm>
-
-            <div class="auth-divider">También puedes</div>
+            @* Step 2: Correo, Contraseña, Confirmar Contraseña *@
+            @if (currentStep == 2)
+            {
+                <EditForm Model="@model" OnValidSubmit="HandleRegister" class="auth-form">
+                    <div class="auth-form-fields">
+                        <div class="form-group">
+                            <IconInput Id="email"
+                                       Label="Correo Electrónico"
+                                       Placeholder="Escribe tu correo"
+                                       InputType="InputType.Email"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       @bind-Value="model.Email">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Email" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                        <div class="form-group">
+                            <IconInput Id="password"
+                                       Label="Contraseña"
+                                       Placeholder="Escribe tu contraseña"
+                                       InputType="InputType.Password"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       ShowPasswordToggle="true"
+                                       @bind-Value="model.Password">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Lock" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                        <div class="form-group">
+                            <IconInput Id="confirm-password"
+                                       Label="Confirmar Contraseña"
+                                       Placeholder="Escribe tu contraseña"
+                                       InputType="InputType.Password"
+                                       LeftIconColor="#dcc17a"
+                                       OutlineColor="#1e373c"
+                                       BorderRadius="12px"
+                                       BorderWidth="2px"
+                                       ShowPasswordToggle="true"
+                                       @bind-Value="model.ConfirmPassword">
+                                <LeftIcon>
+                                    <MudIcon Icon="@Icons.Material.Outlined.Lock" Size="Size.Small" />
+                                </LeftIcon>
+                            </IconInput>
+                        </div>
+                    </div>
+                    <MudButton Variant="Variant.Filled"
+                              FullWidth="true"
+                              Size="Size.Large"
+                              Class="auth-submit-btn"
+                              Style="background-color: #ffc334; color: #333;"
+                              ButtonType="ButtonType.Submit">
+                        Crear Cuenta
+                    </MudButton>
+                </EditForm>
+            }
 
             <p class="auth-signup-text">
-                ¿Ya tienes una cuenta? <NavLink href="/" class="auth-link-register">Iniciar sesión</NavLink>
+                ¿Ya tienes una cuenta? <NavLink href="/" class="auth-link-register">Iniciar Sesión</NavLink>
             </p>
         </div>
 
@@ -89,9 +149,13 @@
 </div>
 
 @code {
+    private int currentStep = 1;
     private RegisterModel model = new();
-    private bool showPassword;
-    private bool showConfirmPassword;
+
+    private void GoToStep2()
+    {
+        currentStep = 2;
+    }
 
     private void HandleRegister()
     {
@@ -100,7 +164,9 @@
 
     private class RegisterModel
     {
-        public string FullName { get; set; } = "";
+        public string Nombres { get; set; } = "";
+        public string Apellidos { get; set; } = "";
+        public string NombreUsuario { get; set; } = "";
         public string Email { get; set; } = "";
         public string Password { get; set; } = "";
         public string ConfirmPassword { get; set; } = "";

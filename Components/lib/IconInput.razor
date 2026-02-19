@@ -1,39 +1,38 @@
-@* Reusable outlined input with optional left icon and customizable styling *@
-<div class="icon-input-root">
+@* Reusable input using MudTextField with optional left icon; label and input laid out separately, custom outline on wrapper *@
+@using MudBlazor
+
+<div class="icon-input-root" style="@RootStyle">
     @if (!string.IsNullOrEmpty(Label))
     {
         <label for="@Id" class="icon-input-label">@Label</label>
     }
-    <div class="icon-input-wrapper @(_focused ? "focused" : "")" style="@WrapperStyle">
+    <div class="icon-input-wrapper">
         @if (LeftIcon != null || !string.IsNullOrEmpty(LeftIconClass))
         {
-            <div class="icon-input-icon @(string.IsNullOrEmpty(LeftIconColor) ? "" : "icon-input-icon-colored")" style="@IconStyle">
+            <div class="icon-input-adornment-start @(string.IsNullOrEmpty(LeftIconColor) ? "" : "icon-input-icon-colored")" style="@IconStyle">
                 @if (LeftIcon != null)
                 {
                     @LeftIcon
                 }
-                else
-                {
-                    <i class="@LeftIconClass" aria-hidden="true"></i>
-                }
             </div>
         }
-        <input id="@Id"
-               type="@ActualInputType"
-               class="icon-input-field"
-               placeholder="@Placeholder"
-               value="@Value"
-               @oninput="OnInput"
-               @onfocus="OnFocus"
-               @onfocusout="OnFocusOut" />
+        <MudTextField @id="Id"
+                      T="string"
+                      Placeholder="@Placeholder"
+                      Value="@Value"
+                      ValueChanged="OnValueChanged"
+                      InputType="@ActualInputType"
+                      Variant="Variant.Text"
+                      Margin="Margin.None"
+                      Class="icon-input-mud-field"
+                      Immediate="true" />
         @if (ShowPasswordToggle)
         {
-            <button type="button"
-                    class="icon-input-toggle"
-                    aria-label="@(showPassword ? "Ocultar contraseña" : "Mostrar contraseña")"
-                    @onclick="TogglePasswordVisibility">
-                <MudIcon Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)" Size="Size.Small" />
-            </button>
+            <MudIconButton Icon="@(showPassword ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"
+                           Size="Size.Small"
+                           OnClick="TogglePasswordVisibility"
+                           aria-label="@(showPassword ? "Ocultar contraseña" : "Mostrar contraseña")"
+                           Class="icon-input-toggle" />
         }
     </div>
     @if (BottomContent != null)
@@ -62,36 +61,30 @@
     [Parameter] public string? Value { get; set; }
     [Parameter] public EventCallback<string?> ValueChanged { get; set; }
 
-    private bool _focused;
     private bool showPassword;
 
-    private string ActualInputType
+    private InputType ActualInputType
     {
         get
         {
-            if (ShowPasswordToggle && showPassword) return "text";
-            if (InputType.HasValue)
+            if (ShowPasswordToggle && showPassword) return MudBlazor.InputType.Text;
+            if (InputType.HasValue) return InputType.Value;
+            return Type?.ToLowerInvariant() switch
             {
-                return InputType.Value switch
-                {
-                    MudBlazor.InputType.Email => "email",
-                    MudBlazor.InputType.Password => "password",
-                    _ => "text"
-                };
-            }
-            return Type?.ToLowerInvariant() ?? "text";
+                "email" => MudBlazor.InputType.Email,
+                "password" => MudBlazor.InputType.Password,
+                _ => MudBlazor.InputType.Text
+            };
         }
     }
 
-    private string WrapperStyle => $"background-color: {BackgroundColor}; border: {BorderWidth} solid {OutlineColor}; border-radius: {BorderRadius}; height: {Height};";
+    private string RootStyle => $" --icon-input-bg: {BackgroundColor}; --icon-input-outline: {OutlineColor}; --icon-input-width: {BorderWidth}; --icon-input-radius: {BorderRadius}; --icon-input-height: {Height}; ";
     private string IconStyle => !string.IsNullOrEmpty(LeftIconColor) ? $"color: {LeftIconColor};" : "";
 
-    private async Task OnInput(ChangeEventArgs e)
+    private async Task OnValueChanged(string? value)
     {
-        await ValueChanged.InvokeAsync(e.Value?.ToString());
+        await ValueChanged.InvokeAsync(value);
     }
 
-    private void OnFocus(FocusEventArgs _) => _focused = true;
-    private void OnFocusOut(FocusEventArgs _) => _focused = false;
     private void TogglePasswordVisibility() => showPassword = !showPassword;
 }

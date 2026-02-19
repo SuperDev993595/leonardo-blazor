@@ -1,28 +1,47 @@
+/* Root: label on top, input below */
 .icon-input-root {
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
 }
 
+/* Separate label above input */
 .icon-input-label {
     font-size: 0.875rem;
     font-weight: 500;
     color: inherit;
 }
 
+/* Wrapper provides outline (border, background, height) */
 .icon-input-wrapper {
     display: flex;
     align-items: center;
     box-sizing: border-box;
     padding: 0 0.75rem;
-    min-height: 0;
+    min-height: var(--icon-input-height, 2.5rem);
+    background-color: var(--icon-input-bg, #ffffff);
+    border: var(--icon-input-width, 1px) solid var(--icon-input-outline, #cec497);
+    border-radius: var(--icon-input-radius, 12px);
+    overflow: hidden;
 }
 
-.icon-input-wrapper.focused {
-    outline: none;
+/* MudTextField sits beside left icon; fill remaining space */
+.icon-input-root ::deep .icon-input-wrapper .mud-input-root {
+    flex: 1;
+    min-width: 0;
+    border-radius: inherit;
 }
 
-.icon-input-icon {
+.icon-input-root ::deep .icon-input-wrapper .mud-input-slot {
+    background: transparent !important;
+    padding-left: 0;
+    padding-right: 0;
+    min-height: var(--icon-input-height, 2.5rem);
+    border-radius: inherit;
+}
+
+/* Left icon / adornment start - same as before */
+.icon-input-adornment-start {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -32,50 +51,33 @@
     opacity: 0.7;
 }
 
-.icon-input-icon.icon-input-icon-colored {
+.icon-input-adornment-start.icon-input-icon-colored {
     opacity: 1;
 }
 
-.icon-input-icon ::deep svg {
+.icon-input-adornment-start ::deep svg {
     width: 1.25rem;
     height: 1.25rem;
 }
 
-/* Apply wrapper color to SVG so LeftIconColor is not overridden by parent page styles */
-.icon-input-icon.icon-input-icon-colored ::deep svg {
+.icon-input-adornment-start.icon-input-icon-colored ::deep svg {
     fill: currentColor;
 }
 
-.icon-input-field {
-    flex: 1;
-    min-width: 0;
-    height: 100%;
+/* Input field - no extra border, transparent where needed */
+.icon-input-root ::deep .mud-input-slot input {
     padding: 0;
-    border: none;
-    background: transparent;
     font: inherit;
     color: inherit;
 }
 
-.icon-input-field::placeholder {
+.icon-input-root ::deep .mud-input-slot input::placeholder {
     opacity: 0.6;
 }
 
-.icon-input-field:focus {
-    outline: none;
-}
-
+/* Password toggle button - same as before */
 .icon-input-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-left: 0.25rem;
-    padding: 0.25rem;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    color: inherit;
+    color: inherit !important;
     opacity: 0.7;
 }
 
@@ -83,6 +85,8 @@
     opacity: 1;
 }
 
-.icon-input-toggle-icon {
-    font-size: 1rem;
+.icon-input-root ::deep .icon-input-toggle .mud-icon-root,
+.icon-input-root ::deep .icon-input-toggle svg {
+    width: 1.25rem;
+    height: 1.25rem;
 }
