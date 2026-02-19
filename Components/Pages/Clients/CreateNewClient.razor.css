@@ -1,0 +1,128 @@
+/* Match client-screen from other client pages */
+.create-client-screen {
+    padding: 2rem 1.5rem 3rem;
+    min-height: 100%;
+}
+
+.create-client-page-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+/* Match client-form-card from other client pages */
+.create-client-card {
+    margin: 0 auto;
+    padding: 2.5rem 5.5rem;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.75rem;
+}
+
+.create-client-avatar-wrap {
+    margin-bottom: 0.5rem;
+}
+
+.create-client-avatar-placeholder {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: #e8e8e8;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.create-client-avatar-icon {
+    color: #666 !important;
+    fill: #666 !important;
+    font-size: 3rem !important;
+    width: 3rem !important;
+    height: 3rem !important;
+}
+
+.create-client-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 2rem;
+    width: 100%;
+}
+
+.create-client-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.create-client-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.create-client-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.create-client-hint {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #888;
+}
+
+/* Match client-btn / client-btn-next from other client pages */
+.client-btn,
+.client-btn ::deep .mud-button-root {
+    flex: 1;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.client-btn:hover,
+.client-btn:hover ::deep .mud-button-root {
+    opacity: 0.9;
+}
+
+.client-btn-next,
+.client-btn-next ::deep .mud-button-root {
+    background-color: #ffc334 !important;
+    color: #074344 !important;
+}
+
+.client-btn-next:hover,
+.client-btn-next:hover ::deep .mud-button-root {
+    background-color: #ffc334 !important;
+    opacity: 0.9;
+}
+
+.client-btn-next ::deep .mud-icon-root,
+.client-btn-next ::deep svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
+@media (max-width: 640px) {
+    .create-client-fields {
+        grid-template-columns: 1fr;
+    }
+}

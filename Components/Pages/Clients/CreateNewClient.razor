@@ -1,0 +1,95 @@
+@page "/clients/create-new-client"
+@rendermode InteractiveServer
+@using MudBlazor
+
+<PageTitle>Crear Cliente Nuevo</PageTitle>
+
+<div class="create-client-screen">
+    <h1 class="create-client-page-title">Crear Cliente Nuevo</h1>
+
+    <div class="create-client-card">
+        <div class="create-client-avatar-wrap">
+            <div class="create-client-avatar-placeholder">
+                <MudIcon Icon="@Icons.Material.Outlined.CameraAlt" Size="Size.Large" Class="create-client-avatar-icon" />
+            </div>
+        </div>
+
+        <div class="create-client-fields">
+            <div class="create-client-col">
+                <div class="create-client-field">
+                    <label class="create-client-label">Nombres <span class="create-client-hint">SAME AS ID</span></label>
+                    <IconInput Id="nombres" Placeholder="Escribe tus nombres"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_nombres">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+                <div class="create-client-field">
+                    <label class="create-client-label">Número de Teléfono</label>
+                    <IconInput Id="telefono" Placeholder="Escribe tu teléfono"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_telefono">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.Phone" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+                <div class="create-client-field">
+                    <label class="create-client-label">Número de I <span class="create-client-hint">SAME AS ID</span></label>
+                    <IconInput Id="numero-id" Placeholder="Escribe tu número de documento"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_numeroId">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+            </div>
+            <div class="create-client-col">
+                <div class="create-client-field">
+                    <label class="create-client-label">Apellidos <span class="create-client-hint">SAME AS ID</span></label>
+                    <IconInput Id="apellidos" Placeholder="Escribe tus apellidos"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_apellidos">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+                <div class="create-client-field">
+                    <label class="create-client-label">Correo Electrónico</label>
+                    <IconInput Id="email" Placeholder="Escribe tu correo" InputType="InputType.Email"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_email">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.Email" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+                <div class="create-client-field">
+                    <label class="create-client-label">Fecha de Nacimiento</label>
+                    <IconInput Id="fecha-nac" Placeholder="Escribe tu fecha de nacimiento"
+                               OutlineColor="#074344" LeftIconColor="#dcc17a" BorderRadius="12px" BorderWidth="2px"
+                               @bind-Value="_fechaNac">
+                        <LeftIcon><MudIcon Icon="@Icons.Material.Outlined.CalendarMonth" Size="Size.Small" /></LeftIcon>
+                    </IconInput>
+                </div>
+            </div>
+        </div>
+
+        <MudButton Variant="Variant.Filled"
+                   Class="client-btn client-btn-next"
+                   FullWidth="true"
+                   Size="Size.Large"
+                   OnClick="OnSiguienteClick">
+            Siguiente
+            <MudIcon Icon="@Icons.Material.Filled.ArrowForward" Class="ms-2" />
+        </MudButton>
+    </div>
+</div>
+
+@code {
+    private string _nombres = "";
+    private string _apellidos = "";
+    private string _telefono = "";
+    private string _email = "";
+    private string _numeroId = "";
+    private string _fechaNac = "";
+
+    private void OnSiguienteClick()
+    {
+        // TODO: Validate and go to next step or navigate
+    }
+}
