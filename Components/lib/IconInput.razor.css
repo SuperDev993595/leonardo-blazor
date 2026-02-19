@@ -18,6 +18,7 @@
     align-items: center;
     box-sizing: border-box;
     padding: 0 0.75rem;
+    height: var(--icon-input-height, 2.5rem);
     min-height: var(--icon-input-height, 2.5rem);
     background-color: var(--icon-input-bg, #ffffff);
     border: var(--icon-input-width, 1px) solid var(--icon-input-outline, #cec497);
@@ -25,10 +26,11 @@
     overflow: hidden;
 }
 
-/* MudTextField sits beside left icon; fill remaining space */
+/* MudTextField sits beside left icon; fill remaining space, allow shrink so Height is respected */
 .icon-input-root ::deep .icon-input-wrapper .mud-input-root {
     flex: 1;
     min-width: 0;
+    min-height: 0;
     border-radius: inherit;
 }
 
@@ -36,7 +38,8 @@
     background: transparent !important;
     padding-left: 0;
     padding-right: 0;
-    min-height: var(--icon-input-height, 2.5rem);
+    min-height: 0 !important;
+    height: 100%;
     border-radius: inherit;
 }
 
