@@ -2,10 +2,10 @@
 @rendermode InteractiveServer
 @using MudBlazor
 
-<PageTitle>Datos de empresa / Persona Jurídica</PageTitle>
+<PageTitle>@pageTitle</PageTitle>
 
 <div class="client-screen">
-    <h1 class="client-page-title">Datos de empresa / Persona Jurídica</h1>
+    <h1 class="client-page-title">@pageTitle</h1>
 
     @if (currentStep == 1)
     {
@@ -16,6 +16,12 @@
     else if (currentStep == 2)
     {
         <ClientsComponent2 OnOmitir="OnOmitir"
+                           OnSiguiente="OnSiguiente" />
+    }
+    else if (currentStep == 3)
+    {
+        <ClientsComponent3 Model="@referralModel"
+                           OnOmitir="OnOmitir"
                            OnSiguiente="OnSiguiente" />
     }
     else
@@ -29,6 +35,15 @@
 @code {
     private int currentStep = 1;
     private ClientsComponent1.ClientFormModel clientModel = new();
+    private ClientsComponent3.ReferralFormModel referralModel = new();
+
+    private string pageTitle => currentStep switch
+    {
+        1 => "Datos de empresa / Persona Jurídica",
+        2 => "Datos de empresa / Persona Jurídica",
+        3 => "Datos de Referido",
+        _ => "Clientes"
+    };
 
     private void OnOmitir()
     {
@@ -38,6 +53,5 @@
     private void OnSiguiente()
     {
         currentStep++;
-        // When step is 2+, the page renders the block above – add your next component there.
     }
 }

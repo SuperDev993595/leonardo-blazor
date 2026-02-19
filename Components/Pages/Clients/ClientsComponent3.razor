@@ -1,0 +1,69 @@
+@using MudBlazor
+@rendermode InteractiveServer
+
+<div class="client-form-card">
+    <EditForm Model="@Model" class="client-form">
+        <div class="client-form-fields">
+            <IconInput Id="vendedor"
+                       Label="Vendedor"
+                       Placeholder="Escribe el nombre del vendedor"
+                       OutlineColor="#074344"
+                       LeftIconColor="#dcc17a"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       @bind-Value="Model.Vendedor">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" />
+                </LeftIcon>
+            </IconInput>
+            <IconInput Id="referidos"
+                       Label="Referidos"
+                       Placeholder="Escribe tus referidos"
+                       OutlineColor="#074344"
+                       LeftIconColor="#dcc17a"
+                       BorderRadius="12px"
+                       BorderWidth="2px"
+                       @bind-Value="Model.Referidos">
+                <LeftIcon>
+                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Small" />
+                </LeftIcon>
+            </IconInput>
+        </div>
+        <div class="client-form-actions">
+            <MudButton Variant="Variant.Filled"
+                       EndIcon="@Icons.Material.Outlined.Close"
+                       Class="client-btn client-btn-skip"
+                       FullWidth="true"
+                       OnClick="OnOmitirClick">
+                Omitir
+            </MudButton>
+            <MudButton Variant="Variant.Filled"
+                       EndIcon="@Icons.Material.Outlined.ArrowForward"
+                       Class="client-btn client-btn-next"
+                       FullWidth="true"
+                       OnClick="OnSiguienteClick">
+                Siguiente
+            </MudButton>
+        </div>
+    </EditForm>
+</div>
+
+@code {
+    [Parameter]
+    public ReferralFormModel Model { get; set; } = new();
+
+    [Parameter]
+    public EventCallback OnOmitir { get; set; }
+
+    [Parameter]
+    public EventCallback OnSiguiente { get; set; }
+
+    private async Task OnOmitirClick() => await OnOmitir.InvokeAsync();
+    private async Task OnSiguienteClick() => await OnSiguiente.InvokeAsync();
+
+    public class ReferralFormModel
+    {
+        public string Vendedor { get; set; } = "";
+        public string Referidos { get; set; } = "";
+    }
+}
