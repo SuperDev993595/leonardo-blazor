@@ -1,0 +1,25 @@
+@using MudBlazor
+@rendermode InteractiveServer
+
+<div class="client-success-card">
+    <div class="client-success-icon-wrap">
+        <MudIcon Icon="@Icons.Material.Filled.Celebration"
+                 Size="Size.Large"
+                 Class="client-success-icon"
+                 Style="font-size: 5rem; width: 5rem; height: 5rem; color: #074344;" />
+    </div>
+    <h2 class="client-success-headline">¡Felicidades!</h2>
+    <p class="client-success-sub">Has creado un nuevo cliente con éxito</p>
+    <MudButton Variant="Variant.Filled"
+               Class="client-btn client-btn-next client-success-btn"
+               OnClick="OnVerFichaClick">
+        Ver ficha de cliente completa
+    </MudButton>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback OnVerFicha { get; set; }
+
+    private async Task OnVerFichaClick() => await OnVerFicha.InvokeAsync();
+}

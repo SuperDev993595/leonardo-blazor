@@ -1,0 +1,77 @@
+.client-success-card {
+    margin: 0 auto;
+    padding: 5.5rem;
+    background: #fff;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+}
+
+.client-success-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #074344;
+}
+
+.client-success-icon,
+.client-success-icon-wrap ::deep .mud-icon-root,
+.client-success-icon-wrap ::deep svg {
+    color: #074344 !important;
+    fill: #074344 !important;
+}
+
+.client-success-headline {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #074344;
+    margin: 0 0 1rem 0;
+}
+
+.client-success-sub {
+    font-size: 1rem;
+    color: #074344;
+    margin: 0 0 3.5rem 0;
+    line-height: 1.5;
+}
+
+/* Reuse same button look as Omitir/Siguiente (rounded, yellow-orange) */
+.client-success-btn {
+    margin-top: 0;
+    flex: 0 1 auto;
+}
+
+.client-success-btn,
+.client-success-btn ::deep .mud-button-root {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    background-color: #ffc334 !important;
+    color: white !important;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.client-success-btn:hover,
+.client-success-btn:hover ::deep .mud-button-root {
+    background-color: #ffc334 !important;
+    color: white !important;
+    opacity: 0.9;
+}
+
+.client-success-btn ::deep .mud-button-label,
+.client-success-btn ::deep .mud-icon-root,
+.client-success-btn ::deep svg {
+    color: white !important;
+    fill: white !important;
+}

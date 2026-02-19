@@ -24,6 +24,10 @@
                            OnOmitir="OnOmitir"
                            OnSiguiente="OnSiguiente" />
     }
+    else if (currentStep == 4)
+    {
+        <ClientsComponent4 OnVerFicha="OnVerFicha" />
+    }
     else
     {
         <div class="client-form-card">
@@ -42,6 +46,7 @@
         1 => "Datos de empresa / Persona Jurídica",
         2 => "Datos de empresa / Persona Jurídica",
         3 => "Datos de Referido",
+        4 => "Crear Cliente Nuevo",
         _ => "Clientes"
     };
 
@@ -53,5 +58,10 @@
     private void OnSiguiente()
     {
         currentStep++;
+    }
+
+    private void OnVerFicha()
+    {
+        // TODO: Navigate to client file/detail page
     }
 }
