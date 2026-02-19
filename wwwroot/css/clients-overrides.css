@@ -7,6 +7,9 @@
 .client-upload-icon svg {
     color: #074344 !important;
     fill: #074344 !important;
+    font-size: 5rem !important;
+    width: 5rem !important;
+    height: 5rem !important;
 }
 
 /* File list icon color (MudIcon in ClientsComponent2) */

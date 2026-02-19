@@ -41,6 +41,11 @@
     height: 1.25rem;
 }
 
+/* Apply wrapper color to SVG so LeftIconColor is not overridden by parent page styles */
+.icon-input-icon.icon-input-icon-colored ::deep svg {
+    fill: currentColor;
+}
+
 .icon-input-field {
     flex: 1;
     min-width: 0;

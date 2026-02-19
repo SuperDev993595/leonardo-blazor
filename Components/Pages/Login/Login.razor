@@ -1,5 +1,6 @@
 @page "/"
 @layout AuthLayout
+@using MudBlazor
 @rendermode InteractiveServer
 <PageTitle>Iniciar sesión</PageTitle>
 
@@ -15,24 +16,29 @@
                            Label="Correo Electrónico"
                            Placeholder="Escribe tu correo"
                            InputType="InputType.Email"
-                           LeftIconClass="fa-regular fa-envelope"
                            LeftIconColor="#dcc17a"
                            OutlineColor="#1e373c"
                            BorderRadius="12px"
                            BorderWidth="2px"
-                           @bind-Value="model.Email" />
+                           @bind-Value="model.Email">
+                    <LeftIcon>
+                        <MudIcon Icon="@Icons.Material.Outlined.Email" Size="Size.Small" />
+                    </LeftIcon>
+                </IconInput>
 
                 <IconInput Id="password"
                            Label="Contraseña"
                            Placeholder="Escribe tu contraseña"
                            InputType="InputType.Password"
-                           LeftIconClass="fa-solid fa-lock"
                            LeftIconColor="#dcc17a"
                            OutlineColor="#1e373c"
                            BorderRadius="12px"
                            BorderWidth="2px"
                            ShowPasswordToggle="true"
                            @bind-Value="model.Password">
+                    <LeftIcon>
+                        <MudIcon Icon="@Icons.Material.Outlined.Lock" Size="Size.Small" />
+                    </LeftIcon>
                     <BottomContent>
                         <div class="auth-forgot">
                             <NavLink href="/forgot-password" class="auth-link">¿Olvidaste tu contraseña?</NavLink>
@@ -60,12 +66,15 @@
     </div>
 </div>
 
+@inject NavigationManager Navigation
+
 @code {
     private LoginModel model = new();
 
     private void HandleLogin()
     {
-        // TODO: Implement login logic
+        // TODO: Implement login logic (e.g. auth API call)
+        Navigation.NavigateTo("/clients", forceLoad: false);
     }
 
     private class LoginModel
