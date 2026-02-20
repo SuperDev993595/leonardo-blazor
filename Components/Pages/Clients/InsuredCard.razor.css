@@ -10,47 +10,49 @@
     margin-bottom: 1.5rem;
 }
 
-.insured-card {
-    background: rgba(255, 255, 255, 0.32);
+/* ::deep so styles apply to MudPaper/child component roots */
+.insured-screen ::deep .insured-card {
+    background: rgba(255, 255, 255, 0.38) !important;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 24px !important;
     padding: 1.25rem;
+    box-shadow: none !important;
 }
 
-.insured-grid {
-    display: grid;
-    grid-template-columns: auto minmax(0, 2fr) minmax(0, 1fr);
-    gap: 1.5rem;
-    align-items: start;
+.insured-main-grid {
     margin-bottom: 1.5rem;
 }
 
-.insured-grid-spacer {
-    min-width: 0;
+/* Keep original grid proportions: avatar | personal (2x) | downloads (1x) */
+.insured-main-grid ::deep .mud-grid-item {
+    padding: 0;
 }
+
 
 .insured-avatar-wrap {
     flex-shrink: 0;
-}
-
-.insured-avatar-placeholder {
-    width: 140px;
-    height: 140px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-align: center;
-    padding: 0.5rem;
 }
 
-.insured-personal-card {
+.insured-avatar-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.insured-avatar-image ::deep img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.insured-screen ::deep .insured-personal-card {
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
@@ -82,58 +84,49 @@
     font-weight: 600;
 }
 
-.insured-uploads {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    min-width: 0;
-    width: 100%;
+/* Download buttons: match card look (white transparent, rounded); ::deep for MudButton */
+.insured-screen ::deep .insured-download-btn {
+    background: rgba(255, 255, 255, 0.38) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border-radius: 24px !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 0.85rem !important;
+    min-height: 80px !important;
+    text-transform: none !important;
+    justify-content: flex-start !important;
+    padding-left: 1.25rem !important;
+    box-shadow: none !important;
 }
 
-.insured-upload-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.85rem;
-    min-height: 80px;
+.insured-screen ::deep .insured-download-btn:hover {
+    background: rgba(255, 255, 255, 0.5) !important;
 }
 
-.insured-upload-card .insured-icon-label-value {
+.insured-screen ::deep .insured-download-btn .mud-button-label {
+    padding-left: 0.5rem;
     flex: 1;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    gap: 0.75rem;
 }
 
-.insured-upload-icon,
-.insured-upload-card .insured-upload-icon,
-.insured-upload-card ::deep .mud-icon-root,
-.insured-upload-card ::deep svg {
+.insured-screen ::deep .insured-download-btn .mud-icon-root,
+.insured-screen ::deep .insured-download-btn svg {
     color: #dcc17a !important;
     fill: #dcc17a !important;
+    flex-shrink: 0;
 }
 
-.insured-middle-left {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    min-width: 0;
-    grid-column: 1 / span 2;
+/* Same gap between the two download buttons as original .insured-uploads */
+.insured-downloads-stack {
+    gap: 1.2rem;
 }
 
-.insured-middle-right {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    min-width: 0;
-}
-
-.insured-middle-right {
-    width: 100%;
+.insured-downloads-stack ::deep .mud-stack {
+    gap: 1.2rem !important;
 }
 
 .insured-section-title {
@@ -143,7 +136,12 @@
     margin: 0;
 }
 
-.insured-details-card {
+/* Same vertical gap between section title and card as original */
+.insured-main-grid .insured-section-title {
+    margin: 1.5rem 0rem;
+}
+
+.insured-screen ::deep .insured-details-card {
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
@@ -156,7 +154,7 @@
     flex-shrink: 0;
 }
 
-.insured-details-card .insured-icon-label-value {
+.insured-screen ::deep .insured-details-card .insured-icon-label-value {
     min-width: 0;
 }
 
@@ -174,7 +172,7 @@
     fill: #dcc17a !important;
 }
 
-.insured-primas-card {
+.insured-screen ::deep .insured-primas-card {
     display: flex;
     flex-direction: column;
     gap: 0.2rem;
@@ -251,57 +249,60 @@
     max-width: 8rem;
 }
 
-.insured-policy-pill {
-    display: inline-flex;
-    align-items: center;
+/* MudTabs pill – anchor from .insured-policies so ::deep applies to MudTabs */
+.insured-policies ::deep .insured-policy-pill {
     min-width: 42rem;
-    background: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.32) !important;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 9999px;
     padding: 0.35rem;
-    gap: 0;
+    box-shadow: none !important;
 }
 
-.insured-policy-tab {
-    padding: 0.5rem 1rem;
-    border: none;
+.insured-policies ::deep .insured-policy-pill .mud-tabs-toolbar {
+    padding: 0 !important;
+    min-height: 0 !important;
     border-radius: 9999px;
-    background: transparent;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: "Poppins", sans-serif;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    background: transparent !important;
+    box-shadow: none !important;
 }
 
-.insured-policy-tab:hover {
-    color: rgba(255, 255, 255, 0.9);
+.insured-policies ::deep .insured-policy-pill .mud-tab {
+    padding: 0.5rem 1rem !important;
+    border-radius: 9999px !important;
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    font-family: "Poppins", sans-serif !important;
+    text-transform: none !important;
+    min-height: 0 !important;
+    box-shadow: none !important;
 }
 
-.insured-policy-tab-active {
-    background: #ffc334;
-    color: #074344;
+.insured-policies ::deep .insured-policy-pill .mud-tab:hover {
+    color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.insured-policy-tab-active:hover {
-    background: #e6b12f;
-    color: #074344;
+.insured-policies ::deep .insured-policy-pill .mud-tab.mud-active-tab,
+.insured-policies ::deep .insured-policy-pill .mud-tab.mud-tab-active {
+    background: #ffc334 !important;
+    color: #074344 !important;
 }
 
-@media (max-width: 900px) {
-    .insured-grid {
-        grid-template-columns: 1fr;
-    }
+.insured-policies ::deep .insured-policy-pill .mud-tab.mud-active-tab:hover,
+.insured-policies ::deep .insured-policy-pill .mud-tab.mud-tab-active:hover {
+    background: #e6b12f !important;
+    color: #074344 !important;
+}
 
-    .insured-grid-spacer {
-        display: none;
-    }
+.insured-policies ::deep .insured-policy-pill .mud-tabs-slider {
+    display: none !important;
+}
 
-    .insured-middle-left {
-        grid-column: 1;
-    }
+.insured-policies ::deep .insured-policy-panel {
+    display: none !important;
 }
 
 @media (max-width: 700px) {
@@ -310,8 +311,9 @@
         align-items: flex-start;
     }
 
-    .insured-policy-pill {
+    .insured-policies ::deep .insured-policy-pill {
         flex-wrap: wrap;
         width: 100%;
+        min-width: 0;
     }
 }

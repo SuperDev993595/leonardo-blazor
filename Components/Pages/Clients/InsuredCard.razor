@@ -1,124 +1,144 @@
 @page "/clients/insured-card"
 @rendermode InteractiveServer
 @using MudBlazor
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Ficha de Asegurado</PageTitle>
 
 <div class="insured-screen">
     <h1 class="insured-page-title">Ficha de Asegurado</h1>
 
-    @* Top + Middle share same grid so right column (uploads / Primas) has same width *@
-    <div class="insured-grid">
-    @* Row 1: Avatar + Personal + Uploads *@
-    <div class="insured-avatar-wrap">
-        <div class="insured-avatar-placeholder">CLIENT PICTURE</div>
-    </div>
-    <div class="insured-card insured-personal-card">
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-icon-label-value">@_customerName</span>
+    <MudGrid Spacing="3" Class="insured-main-grid">
+        @* Row 1: Avatar + Personal + Download buttons *@
+        <MudItem xs="12" md="2">
+            <div class="insured-avatar-wrap">
+                <MudImage Src="@_avatarUrl" Alt="Avatar" Width="180" Height="180" ObjectFit="ObjectFit.Cover" Class="insured-avatar-image" />
             </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Email" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-icon-label-value">@_email</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-icon-label-value">@_clientId</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.CalendarMonth" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-icon-label-value">@_dob</span>
-            </div>
-    </div>
-    <div class="insured-uploads">
-        <div class="insured-card insured-upload-card">
-            <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-upload-icon" />
-            <span class="insured-icon-label-value">@_idDocName</span>
-        </div>
-        <div class="insured-card insured-upload-card">
-            <MudIcon Icon="@Icons.Material.Outlined.CreditCard" Size="Size.Medium" Class="insured-upload-icon" />
-            <span class="insured-icon-label-value">@_licenseDocName</span>
-        </div>
-    </div>
+        </MudItem>
+        <MudItem xs="12" md="6">
+            <MudPaper Class="insured-card insured-personal-card" Elevation="0">
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-icon-label-value">@_customerName</span>
+                </div>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Email" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-icon-label-value">@_email</span>
+                </div>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-icon-label-value">@_clientId</span>
+                </div>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.CalendarMonth" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-icon-label-value">@_dob</span>
+                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" md="4" Class="insured-downloads-stack">
+            <MudStack Spacing="3">
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Inherit"
+                           FullWidth="true"
+                           Class="insured-download-btn"
+                           StartIcon="@Icons.Material.Outlined.Badge"
+                           OnClick="@(() => DownloadPdf(_idDocUrl, _idDocName))">
+                    @_idDocName
+                </MudButton>
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Inherit"
+                           FullWidth="true"
+                           Class="insured-download-btn"
+                           StartIcon="@Icons.Material.Outlined.CreditCard"
+                           OnClick="@(() => DownloadPdf(_licenseDocUrl, _licenseDocName))">
+                    @_licenseDocName
+                </MudButton>
+            </MudStack>
+        </MudItem>
 
-    @* Row 2: empty + Detalles del Cliente + Primas *@
-    <div class="insured-grid-spacer"></div>
-    <div class="insured-middle-left">
-        <h2 class="insured-section-title">Detalles del Cliente</h2>
-        <div class="insured-card insured-details-card">
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-detail-label">Vendedor -</span>
-                <span class="insured-icon-label-value">@_salesPerson</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Business" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-detail-label">Empresa -</span>
-                <span class="insured-icon-label-value">@_enterpriseId</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-detail-label">TAX ID</span>
-                <span class="insured-icon-label-value">@_taxId</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-detail-label">TAX ID2</span>
-                <span class="insured-icon-label-value">@_taxId2</span>
-            </div>
-            <div class="insured-icon-label-row">
-                <MudIcon Icon="@Icons.Material.Outlined.People" Size="Size.Medium" Class="insured-icon-label-icon" />
-                <span class="insured-detail-label">Referido -</span>
-                <span class="insured-icon-label-value">@_referral</span>
-            </div>
-        </div>
-    </div>
-    <div class="insured-middle-right">
-        <h2 class="insured-section-title">Primas</h2>
-        <div class="insured-card insured-primas-card">
-            <p class="insured-primas-subtitle">
-                <MudIcon Icon="@Icons.Material.Outlined.Receipt" Size="Size.Small" Class="insured-title-icon" />
-                Facturación
-            </p>
-            <p class="insured-total-label">Total de Primas:</p>
-            <p class="insured-total-amount">$5,657.32</p>
-            <div class="insured-premium-breakdown">
-                <div class="insured-premium-item">
-                    <span class="insured-premium-label">@_prem1</span>
-                    <span class="insured-premium-sep">-</span>
-                    <span class="insured-premium-value">$1296.03</span>
+        @* Row 2: Detalles del Cliente + Primas *@
+        <MudItem xs="12" md="8">
+            <h2 class="insured-section-title">Detalles del Cliente</h2>
+            <MudPaper Class="insured-card insured-details-card" Elevation="0">
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Person" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-detail-label">Vendedor -</span>
+                    <span class="insured-icon-label-value">@_salesPerson</span>
                 </div>
-                <div class="insured-premium-item">
-                    <span class="insured-premium-label">@_prem2</span>
-                    <span class="insured-premium-sep">-</span>
-                    <span class="insured-premium-value">$654.35</span>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Business" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-detail-label">Empresa -</span>
+                    <span class="insured-icon-label-value">@_enterpriseId</span>
                 </div>
-                <div class="insured-premium-item">
-                    <span class="insured-premium-label">@_prem3</span>
-                    <span class="insured-premium-sep">-</span>
-                    <span class="insured-premium-value">$2589.64</span>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-detail-label">TAX ID</span>
+                    <span class="insured-icon-label-value">@_taxId</span>
                 </div>
-                <div class="insured-premium-item">
-                    <span class="insured-premium-label">@_prem4</span>
-                    <span class="insured-premium-sep">-</span>
-                    <span class="insured-premium-value">$756.12</span>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.Badge" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-detail-label">TAX ID2</span>
+                    <span class="insured-icon-label-value">@_taxId2</span>
                 </div>
-            </div>
-        </div>
-    </div>
-    </div>
+                <div class="insured-icon-label-row">
+                    <MudIcon Icon="@Icons.Material.Outlined.People" Size="Size.Medium" Class="insured-icon-label-icon" />
+                    <span class="insured-detail-label">Referido -</span>
+                    <span class="insured-icon-label-value">@_referral</span>
+                </div>
+            </MudPaper>
+        </MudItem>
+        <MudItem xs="12" md="4">
+            <h2 class="insured-section-title">Primas</h2>
+            <MudPaper Class="insured-card insured-primas-card" Elevation="0">
+                <p class="insured-primas-subtitle">
+                    <MudIcon Icon="@Icons.Material.Outlined.Receipt" Size="Size.Small" Class="insured-title-icon" />
+                    Facturación
+                </p>
+                <p class="insured-total-label">Total de Primas:</p>
+                <p class="insured-total-amount">$5,657.32</p>
+                <div class="insured-premium-breakdown">
+                    <div class="insured-premium-item">
+                        <span class="insured-premium-label">@_prem1</span>
+                        <span class="insured-premium-sep">-</span>
+                        <span class="insured-premium-value">$1296.03</span>
+                    </div>
+                    <div class="insured-premium-item">
+                        <span class="insured-premium-label">@_prem2</span>
+                        <span class="insured-premium-sep">-</span>
+                        <span class="insured-premium-value">$654.35</span>
+                    </div>
+                    <div class="insured-premium-item">
+                        <span class="insured-premium-label">@_prem3</span>
+                        <span class="insured-premium-sep">-</span>
+                        <span class="insured-premium-value">$2589.64</span>
+                    </div>
+                    <div class="insured-premium-item">
+                        <span class="insured-premium-label">@_prem4</span>
+                        <span class="insured-premium-sep">-</span>
+                        <span class="insured-premium-value">$756.12</span>
+                    </div>
+                </div>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
 
-    @* Bottom: Pólizas – title left, pill tab group right *@
+    @* Bottom: Pólizas *@
     <div class="insured-policies">
         <h2 class="insured-section-title">Pólizas</h2>
-        <div class="insured-policy-pill">
-            <button type="button" class="@($"insured-policy-tab {(_activePolicy == 0 ? "insured-policy-tab-active" : "")}")" @onclick="@(() => _activePolicy = 0)">Seguro de Auto</button>
-            <button type="button" class="@($"insured-policy-tab {(_activePolicy == 1 ? "insured-policy-tab-active" : "")}")" @onclick="@(() => _activePolicy = 1)">Seguro de Vida</button>
-            <button type="button" class="@($"insured-policy-tab {(_activePolicy == 2 ? "insured-policy-tab-active" : "")}")" @onclick="@(() => _activePolicy = 2)">Seguro Médico</button>
-            <button type="button" class="@($"insured-policy-tab {(_activePolicy == 3 ? "insured-policy-tab-active" : "")}")" @onclick="@(() => _activePolicy = 3)">Seguro Residencia</button>
-            <button type="button" class="@($"insured-policy-tab {(_activePolicy == 4 ? "insured-policy-tab-active" : "")}")" @onclick="@(() => _activePolicy = 4)">Fianzas</button>
-        </div>
+        <MudTabs ActivePanelIndex="_activePolicy"
+                 ActivePanelIndexChanged="OnPolicyTabChanged"
+                 Rounded="true"
+                 ApplyEffectsToContainer="false"
+                 Elevation="0"
+                 Color="Color.Inherit"
+                 Class="insured-policy-pill"
+                 PanelClass="insured-policy-panel">
+            <MudTabPanel Text="Seguro de Auto"><span></span></MudTabPanel>
+            <MudTabPanel Text="Seguro de Vida"><span></span></MudTabPanel>
+            <MudTabPanel Text="Seguro Médico"><span></span></MudTabPanel>
+            <MudTabPanel Text="Seguro Residencia"><span></span></MudTabPanel>
+            <MudTabPanel Text="Fianzas"><span></span></MudTabPanel>
+        </MudTabs>
     </div>
 </div>
 
@@ -135,5 +155,20 @@
     private string _prem1 = "Enterprise name", _prem2 = "enterprise name", _prem3 = "enterprise name", _prem4 = "Enterprise name";
     private string _idDocName = "id_document.pdf";
     private string _licenseDocName = "drivers_license.pdf";
-    private int _activePolicy = 1;
+    private string _idDocUrl = ""; // Set from API when loading client; empty = no download yet
+    private string _licenseDocUrl = "";
+    private int _activePolicy = 0;
+    private string _avatarUrl = "https://www.gravatar.com/avatar/?d=mp&s=140";
+
+    private async Task DownloadPdf(string? url, string filename)
+    {
+        if (string.IsNullOrEmpty(url)) return;
+        await JSRuntime.InvokeVoidAsync("downloadFile", url, filename);
+    }
+
+    private void OnPolicyTabChanged(int index)
+    {
+        _activePolicy = index;
+        StateHasChanged();
+    }
 }

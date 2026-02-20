@@ -26,6 +26,15 @@
             var el = document.getElementById('main-layout-sidebar');
             if (el) el.classList.toggle('sidebar-collapsed');
         };
+        window.downloadFile = function (url, filename) {
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = filename || '';
+            a.rel = 'noopener';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        };
     </script>
     <script src="_framework/blazor.web.js"></script>
 </body>
