@@ -27,6 +27,53 @@
 
 .create-client-avatar-wrap {
     margin-bottom: 0.5rem;
+    position: relative;
+}
+
+#avatar-file {
+    display: none;
+}
+/* Hide the file input (::deep targets the real input from Blazor's InputFile); label still opens dialog */
+.create-client-avatar-file-wrap {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+.create-client-avatar-file-wrap::deep input[type="file"] {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0.1px !important;
+    height: 0.1px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    pointer-events: none !important;
+}
+
+.create-client-avatar-label {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.create-client-avatar-image {
+    width: 120px !important;
+    height: 120px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.create-client-avatar-image ::deep img {
+    width: 120px !important;
+    height: 120px !important;
+    object-fit: cover;
 }
 
 .create-client-avatar-placeholder {
@@ -38,7 +85,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
 }
 
 .create-client-avatar-icon {

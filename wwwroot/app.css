@@ -56,3 +56,28 @@ h1:focus {
     border-color: #929292;
 }
 
+/* Hide create-client file input so "Choose file" is never shown (global so it always applies) */
+.create-client-avatar-file-wrap {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    display: none !important;
+}
+.create-client-avatar-file-wrap input[type="file"],
+input#avatar-file[type="file"] {
+    position: absolute !important;
+    left: -9999px !important;
+    width: 0.1px !important;
+    height: 0.1px !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    clip-path: inset(50%) !important;
+    pointer-events: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+}
+

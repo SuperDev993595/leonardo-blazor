@@ -9,9 +9,21 @@
 
     <div class="create-client-card">
         <div class="create-client-avatar-wrap">
-            <div class="create-client-avatar-placeholder">
-                <MudIcon Icon="@Icons.Material.Outlined.CameraAlt" Size="Size.Large" Class="create-client-avatar-icon" />
+            <div class="create-client-avatar-file-wrap">
+                <InputFile id="avatar-file" Accept="image/*" OnChange="OnAvatarFileChanged" />
             </div>
+            <label for="avatar-file" class="create-client-avatar-label">
+                @if (!string.IsNullOrEmpty(_avatarImageDataUrl))
+                {
+                    <MudImage Src="@_avatarImageDataUrl" Alt="Avatar" Width="120" Height="120" ObjectFit="ObjectFit.Cover" Class="create-client-avatar-image" />
+                }
+                else
+                {
+                    <div class="create-client-avatar-placeholder">
+                        <MudIcon Icon="@Icons.Material.Outlined.CameraAlt" Size="Size.Large" Class="create-client-avatar-icon" />
+                    </div>
+                }
+            </label>
         </div>
 
         <div class="create-client-fields">
@@ -87,6 +99,27 @@
     private string _email = "";
     private string _numeroId = "";
     private string _fechaNac = "";
+    private string? _avatarImageDataUrl;
+    private const long MaxAvatarFileSize = 4 * 1024 * 1024; // 4MB
+
+    private async Task OnAvatarFileChanged(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file == null) return;
+        try
+        {
+            using var stream = file.OpenReadStream(MaxAvatarFileSize);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            var bytes = ms.ToArray();
+            var contentType = file.ContentType ?? "image/jpeg";
+            _avatarImageDataUrl = $"data:{contentType};base64,{Convert.ToBase64String(bytes)}";
+        }
+        catch (Exception)
+        {
+            // File too large or read error; optionally show snackbar
+        }
+    }
 
     private void OnSiguienteClick()
     {
